@@ -1,17 +1,20 @@
 {% extends "user/layout.html" %}
 {% block user_content %}
     <link rel="stylesheet" href="/static/css/video-list.css">
-    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet"/>
     <h1>Danh sách video</h1>
     {% if session['user']['id'] == user.id|string %}
-    <button class="btn btn-success" type="button" onclick="window.location.href='{{ url_for('user.video.add') }}';">
-        Thêm
-    </button>
-    {%  endif %}
+{#        <a class="btn btn-success" type="button" href="{{ url_for('user.video.add') }}">#}
+{#            Thêm#}
+{#        </a>#}
+        <a class="btn btn-success" type="button" href="/user/video/add">
+            Thêm
+        </a>
+    {% endif %}
     <div class="card-container">
         {% for video in videos %}
             <div class="card">
-                <div class="video-container" >
+                <div class="video-container">
                     <video
                             id="video{{ video.id }}"
                             class="video-js"
@@ -19,9 +22,9 @@
                             preload="auto"
                             muted
                             data-setup="{}"
-{#                            Style =“object-fit: contain;“#}
+                            {#                            Style =“object-fit: contain;“#}
                     >
-                            <source src="{{ video.video_url }}" type="video/mp4" />
+                        <source src="{{ video.video_url }}" type="video/mp4"/>
                     </video>
                     <h2 class="card-title">{{ video.title | safe }}</h2>
                 </div>
@@ -35,5 +38,5 @@
     <!-- Load the YouTube IFrame API script -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <!-- Load your custom JavaScript file -->
-    <script src="/static/js/user/video/video-list.js"></script>
+    <script src="/js/user/video/video_list.js"></script>
 {% endblock %}

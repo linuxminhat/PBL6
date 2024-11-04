@@ -1,5 +1,6 @@
 from datetime import datetime
 
+# from flask_jwt_extended import current_user
 from mongoengine import DateTimeField, Document, EmbeddedDocumentField, IntField, LazyReferenceField, ListField, \
     StringField, URLField, BooleanField
 
@@ -27,7 +28,8 @@ class Video(Document):
         'queryset_class': VideoQuerySet
     }
 
-    def jsonify(self):
+    def jsonify(self, current_user=None):
+        print(__file__, 'video id', self.id)
         return {
             'id': str(self.id),
             'user': self.user.fetch().jsonify(),
@@ -39,14 +41,18 @@ class Video(Document):
             'music_end': self.music_end,
             'public': self.public,
             'created_at': self.created_at,
-            'comments': [comment.jsonify() for comment in self.comments],
+            'comments': [
+                # comment.jsonify() for comment in self.comments
+                comment.jsonify(current_user=current_user) for comment in self.comments
+            ],
+            'total_comments_count': getattr(self, 'total_comments_count', 0)
         }
 
     @classmethod
     def from_dict(cls, **data):
         from app.models.embedded_document.comment import Comment
         try:
-            return cls(
+            video = cls(
                 id=data.get('_id'),
                 user=data.get('user'),
                 music=data.get('music'),
@@ -59,7 +65,10 @@ class Video(Document):
                 comments=[Comment.from_dict(**cmt) for cmt in data.get('comments', None) or []],
                 created_at=data.get('created_at'),
                 updated_at=data.get('updated_at'),
-                deleted_at=data.get('deleted_at')
+                deleted_at=data.get('deleted_at'),
             )
+        # GÁN THÊM total_comments_count LẤY TỪ pipeline
+            video.total_comments_count = data.get('total_comments_count', 0)
+            return video
         except Exception as e:
             raise e

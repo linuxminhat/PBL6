@@ -1,0 +1,12 @@
+{% extends "user/layout.html" %}
+
+{% block user_content %}
+    <div class="container-fluid mt-4">
+        <h2>Chi tiết video</h2>
+        <h3>{{ video.title }}</h3>
+        <video src="{{ video.video_url }}" controls style="max-width: 100%; height:auto;"></video>
+        <p>Người đăng: {{ uploader.username }}</p>
+        <p>Lượt thích: {{ video.like_count }}</p>
+        <p>Ngày đăng: {{ video.created_at.strftime('%d/%m/%Y') }}</p>
+    </div>
+{% endblock %}

@@ -14,14 +14,14 @@ def create_app():
     # Initialize JWTManager
     # jwt = JWTManager(app)
 
-    cors_config = {
-        "origins": ["http://localhost:5000", "http://127.0.0.1:5000"],
-        "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"],
-        "expose_headers": ["X-Total-Count", "X-Page", "X-Per-Page"],
-        "credentials": True
-    }
-    CORS(app, resources={r"/api/*": cors_config})
+    # cors_config = {
+    #     "origins": ["http://localhost:5000", "http://127.0.0.1:5000"],
+    #     "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    #     "allow_headers": ["Content-Type", "Authorization"],
+    #     "expose_headers": ["X-Total-Count", "X-Page", "X-Per-Page"],
+    #     "credentials": True
+    # }
+    # CORS(app, resources={r"/api/*": cors_config})
 
     from app.routes.auth import auth_bp
     from app.routes.user import user_bp

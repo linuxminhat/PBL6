@@ -1,17 +1,5 @@
-const socket = io('http://localhost:5000');
+const socket = io();
 
-// Connection events
-socket.on('connect', () => {
-    console.log('Connected to server');
-});
-
-socket.on('connect_error', (error) => {
-    console.error('Connection error:', error);
-});
-
-socket.on('disconnect', () => {
-    console.log('Disconnected from server');
-});
 window.alert = function(message) {
     document.getElementById('customAlertContent').textContent = message;
     const alertModalElement = document.getElementById('customAlertModal');
@@ -19,6 +7,7 @@ window.alert = function(message) {
     const alertModal = new bootstrap.Modal(alertModalElement, { backdrop: true });
     alertModal.show();
 };
+
 function deactivateModal(ModalId) {
     const modalElement = document.getElementById(ModalId);
     const modalInstance = bootstrap.Modal.getInstance(modalElement);

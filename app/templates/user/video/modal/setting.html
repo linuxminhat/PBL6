@@ -1,0 +1,67 @@
+<!-- Modal cho nút Settings -->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Header của modal -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="settingsModalLabel">Cài đặt</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Nội dung của modal -->
+            <div class="modal-body p-0">
+                <!-- Danh sách các mục cài đặt -->
+                <ul class="list-group list-group-flush">
+                    <!-- Thông tin mô tả -->
+                    <li class="list-group-item">
+                        <a href="#" id="info-button-modal" class="d-flex align-items-center text-decoration-none text-dark" data-bs-dismiss="modal">
+                            <!-- Biểu tượng -->
+                            <i class="bi bi-info-circle-fill fs-5"></i>
+                            <!-- Văn bản -->
+                            <span class="ms-3">Thông tin mô tả</span>
+                        </a>
+                    </li>
+                    <!-- Lưu vào danh sách phát -->
+                    <li class="list-group-item">
+                        <a href="#" id="save-to-playlist-button" class="d-flex align-items-center text-decoration-none text-dark" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#saveToPlaylistModal">
+                            <i class="bi bi-save2-fill fs-5"></i>
+                            <span class="ms-3">Lưu vào danh sách phát</span>
+                        </a>
+                    </li>
+
+                    <!-- Phụ đề -->
+                    <li class="list-group-item">
+                        <a href="#" id="subtitle-button" class="d-flex align-items-center text-decoration-none text-dark">
+                            <!-- Biểu tượng -->
+                            <i class="bi bi-cc-square fs-5"></i>
+                            <!-- Văn bản -->
+                            <span class="ms-3">Phụ đề</span>
+                        </a>
+                    </li>
+
+
+                    <!-- Không đề xuất kênh này -->
+                    <li class="list-group-item">
+                        <a href="#" id="no-suggest-channel" class="d-flex align-items-center text-decoration-none text-dark">
+                            <i class="bi bi-x-circle-fill fs-5"></i>
+                            <span class="ms-3">Không đề xuất kênh này</span>
+                        </a>
+                    </li>
+                    <!-- Báo vi phạm -->
+                    <li class="list-group-item">
+                        <a href="#" id="report-button" class="d-flex align-items-center text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#reportModal">
+                            <i class="bi bi-flag-fill fs-5"></i>
+                            <span class="ms-3">Báo vi phạm</span>
+                        </a>
+                    </li>
+                    <!-- Gửi ý kiến phản hồi -->
+                    <li class="list-group-item">
+                        <a href="#" id="feedback-button" class="d-flex align-items-center text-decoration-none text-dark">
+                            <i class="bi bi-chat-dots-fill fs-5"></i>
+                            <span class="ms-3">Gửi ý kiến phản hồi</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

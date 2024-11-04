@@ -1,4 +1,5 @@
-from mongoengine import DateField, EmailField, EmbeddedDocumentField, FloatField, IntField, LazyReferenceField, ListField, StringField
+from mongoengine import DateField, EmailField, EmbeddedDocumentField, FloatField, IntField, LazyReferenceField, \
+    ListField, StringField, ObjectIdField
 
 from ..base.account import Account
 from ..query_set.extended_account_query_set import ExtendedAccountQuerySet
@@ -12,7 +13,9 @@ class ExtendedAccount(Account):
     bio = StringField(max_length=255)
     notifications = ListField(EmbeddedDocumentField('Notification'))
     like_videos = ListField(LazyReferenceField('Video'), default=list)
-    like_comments = ListField(EmbeddedDocumentField('Comment'), default=list)
+
+    like_comments = ListField(ObjectIdField(), default=list)
+
 
     meta = {
         'allow_inheritance': True,

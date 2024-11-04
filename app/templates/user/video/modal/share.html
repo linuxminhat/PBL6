@@ -1,0 +1,90 @@
+<div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareModalLabel">Chia sẻ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal body with social icons -->
+            <div class="modal-body">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <!-- Left arrow -->
+                    <button class="btn btn-light" id="prev-icon">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+                    <!-- Social icons container -->
+                    <div class="d-flex overflow-auto mx-2" id="social-icons">
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.facebook.com/login', '_blank')">
+                                <i class="bi bi-facebook"></i>
+                            </button>
+                            <p class="small">Facebook</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.pinterest.com/login/', '_blank')">
+                                <i class="bi bi-pinterest"></i>
+                            </button>
+                            <p class="small">Pinterest</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.whatsapp.com/', '_blank')">
+                                <i class="bi bi-whatsapp"></i>
+                            </button>
+                            <p class="small">Whatsapp</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://twitter.com/login', '_blank')">
+                                <i class="bi bi-twitter"></i>
+                            </button>
+                            <p class="small">X</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('mailto:', '_blank')">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                            <p class="small">Gửi email</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.kakaocorp.com/service/KakaoTalk', '_blank')">
+                                <i class="bi bi-chat-dots"></i>
+                            </button>
+                            <p class="small">KakaoTalk</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.reddit.com/login/', '_blank')">
+                                <i class="bi bi-reddit"></i>
+                            </button>
+                            <p class="small">Reddit</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.linkedin.com/login', '_blank')">
+                                <i class="bi bi-linkedin"></i>
+                            </button>
+                            <p class="small">LinkedIn</p>
+                        </div>
+                        <div class="text-center me-3">
+                            <button class="btn btn-light rounded-circle" onclick="window.open('https://www.tumblr.com/login', '_blank')">
+                                <i class="bi bi-tumblr"></i>
+                            </button>
+                            <p class="small">Tumblr</p>
+                        </div>
+                    </div>
+
+                    <!-- Right arrow -->
+                    <button class="btn btn-light" id="next-icon">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Box with link and copy button -->
+                <div class="input-group">
+                    <input type="text" class="form-control" id="share-link" value="" readonly>
+                    <button class="btn btn-primary" id="copy-button">Sao chép</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

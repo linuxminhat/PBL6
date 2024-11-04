@@ -1,24 +1,154 @@
 <nav class="mt-4">
     <ul class="nav flex-column">
-        <li class="nav-item">
-            <a href="/user/index" class="nav-link d-flex align-items-center text-dark">
-                <img class="me-2" src="/static/svg/icons8-home-black.svg" alt="Like" width="30" height="30">
-                Trang chủ
+
+        <!-- Phần Trang chủ -->
+        <li class="nav-item mb-2">
+            <a href="/user/index" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/icons8-home-black.svg" alt="Home" width="24" height="24">
+                <span>Trang chủ</span>
             </a>
         </li>
+
+        <!-- Em dash phân cách -->
+        <li class="nav-item">
+            <hr class="my-2" style="border-top: 1px solid #ccc;">
+        </li>
+
+        <!-- Phần "Bạn" -->
+        <li class="nav-item mb-2">
+            <a href="#" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/user.svg" alt="Bạn" width="24" height="24">
+                <span>Bạn</span>
+            </a>
+        </li>
+
+        <!-- Video của bạn -->
         {% if session['user'] %}
-        <li class="nav-item">
-            <a href="{{ url_for('user.video.list',user_id=session['user']['id']) }}" class="nav-link d-flex align-items-center text-dark">
-                <img class="me-2" src="/static/svg/video.svg" alt="Like" width="30" height="30">
-                Video của bạn
-            </a>
-        </li>
+            <li class="nav-item mb-2">
+                <a href="{{ url_for('user.video.list', user_id=session['user']['id']) }}" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                    <img class="me-3" src="/static/svg/video.svg" alt="Your Videos" width="24" height="24">
+                    <span>Video của bạn</span>
+                </a>
+            </li>
         {% endif %}
-        <li class="nav-item">
-            <a href="#" class="nav-link d-flex align-items-center text-dark">
-                <img class="me-2" src="/static/svg/settings-non.svg" alt="Like" width="30" height="30">
-                Cài đặt
+
+        <!-- Video đã thích -->
+        <li class="nav-item mb-2">
+            <a href="{{ url_for('user.liked_videos.show_liked_videos') }}" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/liked-video.svg" alt="Video đã thích" width="24" height="24">
+                <span>Video đã thích</span>
             </a>
         </li>
+
+
+        <!-- Tạo âm nhạc theo phong cách riêng bạn -->
+        <li class="nav-item mb-2">
+            <a href="{{ url_for('user.generate_music.generate_music') }}" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/musician.svg" alt="Create Custom Music" width="24" height="24">
+                <span>Tạo âm nhạc theo phong cách riêng bạn</span>
+            </a>
+        </li>
+
+
+        <!-- Video cover đã xem -->
+        <li class="nav-item mb-2">
+            <a href="/watched_videos" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/eye.svg" alt="Watched Videos" width="24" height="24">
+                <span>Video cover đã xem</span>
+            </a>
+        </li>
+
+        <!-- Em dash phân cách -->
+        <li class="nav-item">
+            <hr class="my-2" style="border-top: 1px solid #ccc;">
+        </li>
+
+        <!-- Khám phá -->
+        <li class="nav-item mb-2">
+            <span class="text-muted ms-3">Khám phá</span>
+        </li>
+
+        <!-- Thịnh hành -->
+        <li class="nav-item mb-2">
+            <a href="/trending" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/fire.svg" alt="Trending" width="24" height="24">
+                <span>Thịnh hành</span>
+            </a>
+        </li>
+
+        <!-- Âm nhạc -->
+        <li class="nav-item mb-2">
+            <a href="/music" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/music.svg" alt="Music" width="24" height="24">
+                <span>Âm nhạc</span>
+            </a>
+        </li>
+
+        <!-- Em dash phân cách -->
+        <li class="nav-item">
+            <hr class="my-2" style="border-top: 1px solid #ccc;">
+        </li>
+
+        <!-- Nghệ sĩ nổi tiếng bạn theo dõi -->
+        <li class="nav-item mb-2">
+            <span class="text-muted ms-3">Nghệ sĩ nổi tiếng bạn theo dõi</span>
+        </li>
+
+        <!-- Loop qua 3 nghệ sĩ từ database -->
+        {% for artist in top_artists %}
+            <li class="nav-item mb-2">
+                <a href="/artist/{{ artist.id }}" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                    <img class="me-3 rounded-circle" src="{{ artist.avatar_url }}" alt="{{ artist.name }}" width="24" height="24">
+                    <span>{{ artist.name }}</span>
+                </a>
+            </li>
+        {% endfor %}
+
+        <!-- Hiển thị thêm -->
+        <li class="nav-item mb-2">
+            <a href="/artists" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/more.svg" alt="More" width="24" height="24">
+                <span>Hiển thị thêm</span>
+            </a>
+        </li>
+
+        <!-- Em dash phân cách -->
+        <li class="nav-item">
+            <hr class="my-2" style="border-top: 1px solid #ccc;">
+        </li>
+
+        <!-- Cài đặt -->
+        <!-- Thay đổi đây từ `url_for('setting.settings')` sang `url_for('user.setting.settings')` -->
+        <li class="nav-item mb-2">
+            <a href="{{ url_for('user.setting.settings') }}" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/settings-non.svg" alt="Settings" width="24" height="24">
+                <span>Cài đặt</span>
+            </a>
+        </li>
+
+        <!-- Nhật ký báo cáo -->
+        <li class="nav-item mb-2">
+            <a href="/reporthistory" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/report.svg" alt="Report History" width="24" height="24">
+                <span>Nhật ký báo cáo</span>
+            </a>
+        </li>
+
+        <!-- Trợ giúp -->
+        <li class="nav-item mb-2">
+            <a href="/help" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/help.svg" alt="Help" width="24" height="24">
+                <span>Trợ giúp</span>
+            </a>
+        </li>
+
+        <!-- Gửi ý kiến phản hồi -->
+        <li class="nav-item mb-2">
+            <a href="/feedback" class="nav-link d-flex align-items-center text-dark sidebar-link">
+                <img class="me-3" src="/static/svg/feedback.svg" alt="Feedback" width="24" height="24">
+                <span>Gửi ý kiến phản hồi</span>
+            </a>
+        </li>
+
     </ul>
 </nav>

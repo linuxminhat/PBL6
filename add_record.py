@@ -5,7 +5,7 @@ from app.models.user import User
 from app.models.artist import Artist
 from app.models.music import Music
 from app.models.genre import Genre
-from app.models.embedded_document.lyric import Lyric
+from app.models.embedded_document.word import Lyric
 
 connect('PBL6', uuidRepresentation='standard')
 

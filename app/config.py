@@ -9,18 +9,18 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
     # Local mongodb
-    # MONGODB_SETTINGS = {
-    #     'db': 'PBL6',
-    #     'host': 'localhost',
-    #     'port': 27017,
-    #     'uuidRepresentation': 'standard'
-    # }
+    MONGODB_SETTINGS = {
+        'db': 'PBL6',
+        'host': 'localhost',
+        'port': 27017,
+        'uuidRepresentation': 'standard'
+    }
 
     # Remote mongodb
-    MONGODB_SETTINGS = {
-        'db': 'karaoke',
-        'host': os.getenv('MONGO_DB_HOST')
-    }
+    # MONGODB_SETTINGS = {
+    #     'db': 'karaoke',
+    #     'host': os.getenv('MONGO_DB_HOST')
+    # }
 
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
     JWT_TOKEN_LOCATION = ['cookies']

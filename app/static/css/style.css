@@ -1,3 +1,100 @@
+/* Marquee container với flex: 1 và min-width: 0 */
+.marquee-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden; /* Ẩn phần vượt quá nếu cần */
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap; /* Ngăn chặn xuống dòng */
+}
+
+/* Marquee text với animation và overflow handling */
+.marquee-text {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+    /* Thêm hiệu ứng marquee nếu cần */
+    animation: marquee 15s linear infinite;
+}
+
+#video-music-title .marquee-text {
+    animation: marquee 10s linear infinite;
+}
+
+/* Keyframes cho hiệu ứng marquee */
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Đảm bảo <a> chiếm toàn bộ không gian và hiển thị inline-flex */
+.video-music-link {
+    display: inline-flex;
+    white-space: nowrap;
+    color: #fff;
+    text-decoration: none;
+    flex-shrink: 1; /* Cho phép thu nhỏ */
+    max-width: 100%; /* Giới hạn độ rộng tối đa */
+    /* Ngăn cách các từ bị ngắt */
+    word-break: keep-all;
+}
+
+/* Đảm bảo container flex không wrap */
+#video-context {
+    flex-wrap: nowrap;
+}
+
+/* Bổ sung thêm để đảm bảo phần tử flex con không gây tràn */
+.j96cpCtZAIdqxcDrYHPI {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Optional: Nếu bạn muốn dừng hiệu ứng marquee */
+.marquee-text.stop-marquee {
+    animation: none;
+}
+
+/* Định dạng chung cho dòng lyrics */
+.lyric-line {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold; /* Làm chữ đậm hơn */
+    color: green;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    text-align: center;
+    width: 100%;
+    /* Thêm viền đen cho chữ bằng text-shadow */
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
+}
+
+/* Định dạng cho từ đã hát hoặc đang hát */
+.current-word {
+    color: yellow; /* Màu vàng cho từ đã hát hoặc đang hát */
+}
+
+/* Định dạng cho các từ trong dòng lyrics */
+.lyric-line span {
+    display: inline;
+    margin-right: 5px; /* Thêm khoảng cách giữa các từ */
+    transition: color 0.5s ease; /* Thêm hiệu ứng chuyển màu */
+}
+
 .dropdown-menu {
     display: none;
 }
@@ -209,3 +306,123 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.lyric-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lyric-line i {
+    margin: 0 10px;
+}
+
+
+/* Tùy chỉnh giao diện của Bootstrap Tooltips */
+.tooltip-inner {
+    background-color: #333; /* Màu nền */
+    color: #fff;            /* Màu chữ */
+    font-size: 1.2rem;      /* Tăng kích thước chữ */
+    padding: 12px 18px;     /* Tăng khoảng cách padding */
+    border-radius: 8px;     /* Bo góc */
+    max-width: 220px;       /* Chiều rộng tối đa */
+    text-align: center;     /* Căn giữa chữ */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+    z-index: 2000;          /* Đảm bảo tooltip ở trên các phần tử khác */
+}
+
+/* Tùy chỉnh mũi tên của Tooltips */
+.tooltip.bs-tooltip-left .tooltip-arrow::before {
+    border-left-color: #333; /* Màu mũi tên */
+    border-width: 8px;       /* Tăng kích thước mũi tên */
+}
+
+/* Tăng khoảng cách giữa tooltip và nút */
+.tooltip.bs-tooltip-left {
+    margin-left: 15px; /* Điều chỉnh khoảng cách */
+}
+
+/* Đảm bảo Tooltips không bị ẩn bởi overflow của các phần tử cha */
+body {
+    position: relative;
+    z-index: 1;
+}
+
+.tooltip {
+    z-index: 2000; /* Đảm bảo Tooltips hiển thị trên tất cả các phần tử khác */
+}
+#violationWarningModalLabel {
+    display: flex;
+    align-items: center;
+}
+/* Wrapper để định vị hình tròn */
+.cd-thumbnail-wrapper {
+    position: relative;
+    width: 120px; /* Đường kính hình tròn */
+    height: 120px; /* Đường kính hình tròn */
+    margin: 0 auto; /* Căn giữa */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Thumbnail dạng hình tròn */
+.cd-thumbnail {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Tạo hình tròn */
+    overflow: hidden;
+    border: 5px solid rgba(0, 0, 0, 0.2); /* Viền xung quanh */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+    animation: spin 5s linear infinite; /* Hiệu ứng quay */
+}
+
+/* Ảnh bên trong hình tròn */
+.cd-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Bảo đảm ảnh cũng là hình tròn */
+}
+
+/* Hiệu ứng quay */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Thiết kế cho #video-music-title */
+#video-music-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Tăng khoảng cách giữa biểu tượng và chữ */
+    margin-left: 0; /* Giảm ảnh hưởng của margin-left nếu không cần */
+}
+
+#video-music-title .bi-music-note {
+    font-size: 36px;
+    color: #000;
+    flex-shrink: 0; /* Đảm bảo biểu tượng không bị co lại */
+}
+#emoji-picker {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 9999;
+    max-height: 200px;
+    overflow-y: auto;
+}
+#emoji-picker .emoji:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+
+
+
+

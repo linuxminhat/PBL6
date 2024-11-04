@@ -14,7 +14,7 @@ function register() {
     };
 
     // Make the API call using Axios
-    axios.post(`${window.config.API_BASE_URL}/api/auth/register/create`, data)
+    axios.post('/api/auth/register/create', data)
         .then((response) => {
             const rep = response.data;
             if (rep.success === true) {

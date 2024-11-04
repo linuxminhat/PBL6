@@ -6,6 +6,7 @@ const videoElement = document.getElementById('video');
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
 const musicPlayer = document.getElementById('musicPlayer');
+
 window.addEventListener('load', () => {
     const lyricsContainer = document.getElementById('lyricsContainer');
     lyricsContainer.style.display = 'none';  // Hide lyrics when the page loads
@@ -140,11 +141,6 @@ function uploadVideo() {
     formData.append('music_id', musicId);
     formData.append('lyrics', JSON.stringify(lyricsData));  // Send lyrics as JSON
 
-    // Upload the video with lyrics
-    // fetch('/api/user/video/record', {
-    //     method: 'POST',
-    //     body: formData
-    // })
     axios.post(`/api/user/video/record`, formData)
         .then(response => {
             // Check for both 200 (OK) and 201 (Created) as successful responses
@@ -217,25 +213,20 @@ function selectMusic(musicId, musicName, musicArtist, lyrics, musicUrl) {
     const startButton = document.getElementById('startButton');
     const uploadButton = document.getElementById('uploadButton');
 
-    // Set the input field with the selected music name
     musicSearch.value = `${musicName} - ${musicArtist}`;
     selectedMusicId.value = musicId;
 
-    // Store lyrics data globally for later use (lyrics sync with video)
+
     lyricsData = lyrics;
 
-    // Enable the Start Recording button
     startButton.disabled = false;
 
-    // Enable the Upload button for when recording is done
     uploadButton.disabled = false;
 
-    // Clear the search results after selection
     document.getElementById('musicResults').innerHTML = '';
 
-    // Load the music URL in the audio player
     musicPlayer.src = musicUrl;
-    // Optional: You can log the lyrics to verify they are being stored correctly
+
     console.log('Selected lyrics:', lyricsData);
 }
 

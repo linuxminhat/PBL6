@@ -7,13 +7,13 @@
                     {% if session['user'] %}
                     onclick="video_like('{{ session['user']['id'] }}')"
                     {% else %}
-                    data-bs-toggle="modal" data-bs-target="#login-popup"
+                    onclick="openLoginModal()"
                     {% endif %}
-                    class="btn btn-light rounded-circle shadow-sm p-3">
-                {# <button id="like-button" class="btn btn-light rounded-circle shadow-sm p-3"> <!-- w-30 h-30 increases button size -->#}
-                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-                    <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                </svg>
+                    class="btn btn-light rounded-circle shadow-sm p-3"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Tôi thích video này">
+                <i class="bi bi-hand-thumbs-up"></i>
             </button>
             <span id="like-count" class="small mt-1">1</span> <!-- Initial like count -->
         </div>
@@ -24,142 +24,300 @@
                     {% if session['user'] %}
                     onclick="dislike()"
                     {% else %}
-                    data-bs-toggle="modal" data-bs-target="#login-popup"
+                    onclick="openLoginModal()"
                     {% endif %}
-                    class="btn btn-light rounded-circle shadow-sm p-3">
-                {# <button id="dislike-button" class="btn btn-light rounded-circle shadow-sm p-3"> <!-- w-30 h-30 increases button size -->#}
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-down-fill" viewBox="0 0 16 16">
-                    <path d="M6.956 14.534c.065.936.952 1.659 1.908 1.42l.261-.065a1.38 1.38 0 0 0 1.012-.965c.22-.816.533-2.512.062-4.51q.205.03.443.051c.713.065 1.669.071 2.516-.211.518-.173.994-.68 1.2-1.272a1.9 1.9 0 0 0-.234-1.734c.058-.118.103-.242.138-.362.077-.27.113-.568.113-.856 0-.29-.036-.586-.113-.857a2 2 0 0 0-.16-.403c.169-.387.107-.82-.003-1.149a3.2 3.2 0 0 0-.488-.9c.054-.153.076-.313.076-.465a1.86 1.86 0 0 0-.253-.912C13.1.757 12.437.28 11.5.28H8c-.605 0-1.07.08-1.466.217a4.8 4.8 0 0 0-.97.485l-.048.029c-.504.308-.999.61-2.068.723C2.682 1.815 2 2.434 2 3.279v4c0 .851.685 1.433 1.357 1.616.849.232 1.574.787 2.132 1.41.56.626.914 1.28 1.039 1.638.199.575.356 1.54.428 2.591"/>
-                </svg>
+                    class="btn btn-light rounded-circle shadow-sm p-3"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Tôi không thích video này">
+                <i class="bi bi-hand-thumbs-down"></i>
             </button>
-            <span id="dislike-count" class="text-sm"></span> <!-- Initial comment count -->
+            <span id="dislike-count" class="text-sm"></span> <!-- Initial dislike count -->
         </div>
+
         <!-- Button Comment -->
         <div class="d-flex flex-column align-items-center mb-4">
-            <button onclick="toggleComment()" class="btn btn-light rounded-circle shadow-sm p-3"> <!-- w-30 h-30 increases button size -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
-                    <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM3.5 3h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1 0-1m0 2.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1"/>
-                </svg>
+            <button id="comment-button" class="btn btn-light rounded-circle shadow-sm p-3"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Bình luận">
+                <i class="bi bi-chat-right-text"></i>
             </button>
             <span id="comment-count" class="text-sm"></span> <!-- Initial comment count -->
         </div>
 
         <!-- Button Share -->
         <div class="d-flex flex-column align-items-center mb-4">
-            <button id="share-button" class="btn btn-light rounded-circle shadow-sm p-3"> <!-- w-30 h-30 increases button size -->
-                <!-- Share icon (SVG) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
-                    <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
-                </svg>
+            <button id="share-button" class="btn btn-light rounded-circle shadow-sm p-3"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Chia sẻ cho bạn bè"
+                    onclick="openShareModal()">
+                <i class="bi bi-share-fill"></i>
+            </button>
+            {% include 'user/video/modal/share.html' %}
+        </div>
+
+        <!-- Button Setting -->
+        <div class="dropdown">
+            <button id="settings-button" class="btn btn-light rounded-circle shadow-sm p-3 dropdown-toggle"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="left"
+                    title="Cài đặt"
+                    onclick="openSettingsModal()">
+                <i class="bi bi-gear"></i>
             </button>
         </div>
-    <!-- Button setting -->
-        <div class="dropup">
-            <button id="settings-button" class="btn btn-light rounded-circle shadow-sm p-3" data-bs-toggle="dropdown" aria-expanded="false">
-                <!-- Settings icon (SVG) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-                </svg>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                    <a class="dropdown-item" href="#" id="info-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle me-2" viewBox="0 0 16 16">
-                            <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1a6 6 0 1 1 0 12A6 6 0 0 1 8 2z"/>
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.058.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .933-.252 1.044-.598l.088-.416c.057-.27.083-.327-.136-.484l-.355-.223c-.175-.11-.289-.237-.228-.489l.738-3.468c.194-.897-.105-1.319-.808-1.319-.545 0-.933.252-1.044.598l-.088.416c-.057.27-.083.327.136.484l.355.223c.175.11.289.237.228.489zm-.908 4.911c-.386 0-.709-.324-.709-.724 0-.4.323-.724.709-.724s.709.324.709.724c0 .4-.323.724-.709.724z"/>
-                        </svg>
-                        Thông tin mô tả
-                    </a>
-                </li>
-                <!-- Button to open the modal -->
-                <li>
-                    <a class="dropdown-item" href="#" id="save-to-playlist-button" data-bs-toggle="modal" data-bs-target="#saveToPlaylistModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square me-2" viewBox="0 0 16 16">
-                            <path d="M8 4a.5.5 0 0 1 .5.5v2.5H11a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V8.5H5a.5.5 0 0 1 0-1h2.5V4.5A.5.5 0 0 1 8 4z"/>
-                            <path d="M14 14V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1zm-1 0H3V2h10v12z"/>
-                        </svg>
-                        Lưu vào danh sách phát
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-subtitles me-2" viewBox="0 0 16 16">
-                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0V4z"/>
-                            <path d="M0 9v1h16V9H0zm0 2v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1H0z"/>
-                            <path d="M4 5h8v2H4V5z"/>
-                        </svg>
-                        Phụ đề
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#" id="no-suggest-channel">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle me-2" viewBox="0 0 16 16">
-                            <path d="M4.646 4.646a.5.5 0 1 1 .708.708L4.707 6l.647.646a.5.5 0 0 1-.708.708L4 6.707l-.646.647a.5.5 0 0 1-.708-.708L3.293 6l-.647-.646a.5.5 0 0 1 .708-.708L4 5.293l.646-.647z"/>
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1z"/>
-                        </svg>
-                        Không đề xuất kênh này
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#" id="report-button" data-bs-toggle="modal" data-bs-target="#reportModal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag me-2" viewBox="0 0 16 16">
-                            <path d="M14.778.085a.5.5 0 0 1 .222.672l-2.72 5.44 2.72 5.44a.5.5 0 0 1-.894.448l-2.781-5.562a.5.5 0 0 1 0-.448l2.781-5.562a.5.5 0 0 1 .672-.222z"/>
-                            <path d="M1 1h4.5a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-5H1.5a.5.5 0 0 1 0-1H5V1.5a.5.5 0 0 1 .5-.5H1a.5.5 0 0 1 0-1z"/>
-                        </svg>
-                        Báo vi phạm
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots me-2" viewBox="0 0 16 16">
-                            <path d="M7.5 2A5.5 5.5 0 0 0 2 7.5c0 1.285.507 2.488 1.352 3.375C3.131 12.346 2 14.149 2 15a.5.5 0 0 0 .777.416c.728-.444 1.917-1.04 2.853-1.385A5.5 5.5 0 1 0 7.5 2zM11 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                        </svg>
-                        Gửi ý kiến phản hồi
-                    </a>
-                </li>
-            </ul>
-        </div>
+        {% include 'user/video/modal/setting.html' %}
+
     </div>
+        <div class="vh-100 bg-light d-flex flex-column" style="position: relative">
+        <!-- VÙNG TRÊN CÙNG CHƯA CÓ DIV -->
+        <div
+                id="thumbnail-top-region"
+                class="position-absolute"
+                style="
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            width: 40%;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            white-space: nowrap;
+            justify-content: space-between;
+        "
+        >
+            <div
+                    id="video-context"
+                    data-testid="now-playing-widget"
+                    class="deomraqfhIAoSB3SgXpu"
+                    role="contentinfo"
+                    aria-label=""
+                    style="display: flex; align-items: center; gap: 10px; width: 100%; flex-direction: row;"
+            >
+                <div
+                        data-testid="CoverSlotCollapsed__container"
+                        class="GQ5_gIWzIqAfBdmQm8yJ IcyWfMS5VkeOhaI7OWIx"
+                        style="display: flex; align-items: center"
+                >
+                    <div draggable="true">
+                        <button
+                                type="button"
+                                data-testid="cover-art-button"
+                                class="HD9s7U5E1RLSWKpXmrqx"
+                                aria-label="Now playing view"
+                                style="background: none; border: none; padding: 0; cursor: pointer"
+                        >
+                            <div class="BFR9Zt3zpL8BATBMiwQB">
+                                <div
+                                        class="H0HbpIM3UrcupWIAjLWu"
+                                        aria-hidden="true"
+                                        style="width: 100px; height: 100px; position: relative"
+                                >
+                                    <!-- Xóa div chứa SVG icon nhạc -->
+                                    <!-- Chỉ giữ lại img -->
+                                    <div class="cd-thumbnail-wrapper position-relative" style="width: 150px; height: 150px;">
+                                        <div class="cd-thumbnail" style="width: 100%; height: 100%;">
+                                            <img
+                                                    id="video-music-thumbnail_url"
+                                                    aria-hidden="false"
+                                                    draggable="false"
+                                                    loading="eager"
+                                                    src=""
+                                                    alt="Album Art"
+                                                    class="img-thumbnail"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Nút close hay gì đó, nếu không cần có thể bỏ -->
+                    <button
+                            class="_9sCL61nGvQFXv2u02jXw"
+                            aria-label="Now playing view"
+                            aria-pressed="true"
+                            style="background: none; border: none; padding: 0; cursor: pointer"
+                    >
+                        <svg
+                                data-encore-id="icon"
+                                role="img"
+                                aria-hidden="true"
+                                viewBox="0 0 16 16"
+                                class="Svg-sc-ytk21e-0 dYnaPI"
+                                style="width: 16px; height: 16px"
+                        >
+                            <path
+                                    d="M.47 4.97a.75.75 0 0 1 1.06 0L8 11.44l6.47-6.47a.75.75 0 1 1 1.06 1.06L8 13.56.47 6.03a.75.75 0 0 1 0-1.06z"
+                            ></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="j96cpCtZAIdqxcDrYHPI iZrIHsls0lCEhoMDA9kc" style="flex: 1; min-width: 0;">
+                    <div class="PcH6VnzkkDqD36P93i9Q">
+                        <div id="video-music-title" class="eSMjmiD29Ox35O95waw6" title="Tên bài hát" style="margin-left: 40px; display: flex; align-items: center; gap: 10px;">
+                            <i class="bi bi-music-note" style="font-size: 24px; color: #000;"></i>
+                            <div class="W5cB_o0XkkU7Q8tlTGxq" style="font-family: 'Arial', sans-serif; font-size: 20px; font-weight: bold; color: #000;">
+                                <div class="PGSe59fD1Hwc9yUM2d3U" style="--trans-x: 0px">
+                                    <div
+                                            class="encore-text encore-text-body-small K9Nj3oI7bTNFh5AGp5GA"
+                                            data-encore-id="text"
+                                            data-testid="context-item-info-title"
+                                            dir="auto"
+                                    >
+                                        <div class="marquee-container flex flex-row items-center overflow-hidden w-full">
+                                             <span class="marquee-text inline-block whitespace-nowrap overflow-hidden text-ellipsis">
+                                                <a
+                                                    id="video-music-name"
+                                                    draggable="false"
+                                                    data-testid="context-item-link"
+                                                    href="#"
+                                                    class="text-white whitespace-nowrap no-underline"
+                                                    style="text-decoration:none;"
+                                                >
+                                                <!-- Tên bài hát -->
+
+                                                </a>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p2ya1fQ3o9pY4alcW0o4 MrkH0O1OzmNv_oCQdvI8"></div>
+                    <div class="w_TTPh4y9H1YD6UrTMHa r6Psl2_K_0vpdX6vFLQd">
+                        <div class="eSMjmiD29Ox35O95waw6" title="name">
+                            <div class="W5cB_o0XkkU7Q8tlTGxq">
+                                <div class="PGSe59fD1Hwc9yUM2d3U" style="--trans-x: 0px">
+                                    <div
+                                            class="encore-text encore-text-marginal encore-internal-color-text-subdued w_TTPh4y9H1YD6UrTMHa"
+                                            data-encore-id="text"
+                                            data-testid="context-item-info-subtitles"
+                                    >
+                                  <span>
+                                    <!-- Tên nghệ sĩ -->
+                                  </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- HẾT VÙNG TRÊN CÙNG -->
+    </div>
+
 
     <!-- Video Section (Centered) -->
     <div class="position-relative bg-white shadow rounded overflow-hidden d-flex flex-column align-items-center mb-4"
-         style="width: 30%; height: 80%;">
+         style="width: 55%; height: 80%;">
         <!-- Video Container -->
-        <div class="position-relative w-100 h-100">
-            <iframe id="video-player" class="position-relative w-100 h-100" src=""
-                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
-                clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="position-relative w-100 h-100 video-container">
+            <!-- Video player -->
+            <video id="video-player" class="position-relative w-100 h-100" controls autoplay muted>
+                <!-- Trình duyệt của bạn không hỗ trợ thẻ video -->
+            </video>
+            <!-- Thông tin hiển thị trên video -->
+            <div id="video-info-overlay" class="position-absolute text-white p-3"
+                 style="background: rgba(0, 0, 0, 0.5); width: 100%; bottom: 80px; left: 0;">
+                <!-- Nội dung -->
+            <!-- Tiêu đề video -->
+                <h5 id="video-title" class="fw-bold mb-2"></h5>
+                <!-- Người đăng và thời gian -->
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong>Người đăng:</strong> <span id="uploader"></span>
+                    </div>
+                    <div>
+                        <strong>Thời gian:</strong> <span id="video-created-at"></span>
+                    </div>
+                </div>
+                <!-- Tên bài hát -->
+                <div>
+                    <strong>Bài hát:</strong> <span id="video-music"></span>
+                </div>
+            </div>
+            <!-- Thêm phần hiển thị lyrics -->
+            <div id="lyrics-overlay" class="position-absolute text-center w-100"
+                 style="top: 20px; left: 0; text-shadow: 2px 2px 4px #000;z-index: 1000;">
+                <!-- Dòng 1 -->
+                <div id="lyric-line-1" class="lyric-line mb-2">
+                    <!-- Nội dung dòng 1 sẽ được hiển thị ở đây -->
+                </div>
+                <!-- Dòng 2 -->
+                <div id="lyric-line-2" class="lyric-line">
+                    <!-- Nội dung dòng 2 sẽ được hiển thị ở đây -->
+                </div>
+            </div>
+
         </div>
     </div>
 
+
     <!-- Comment Section (Centered) -->
-    <div id="comment-section" class="position-relative bg-white shadow rounded overflow-hidden d-flex flex-column align-items-center mb-4"
-         style="width: 30%; height: 80%; background-color: #f8f9fa;">
+    <div id="comment-section" class="position-relative bg-white shadow rounded d-flex flex-column align-items-center mb-4"
+         style="width: 55%; height: 80%; background-color: #f8f9fa;">
         <!-- Comment Container -->
-        <div id="comment-container" class="position-relative w-100 h-100 p-3 overflow-auto">
-            <h5>Comments</h5>
-            <ul id="comment-list" class="list-unstyled">
-            </ul>
+        <div class="position-relative w-100 h-100 p-3 overflow-auto">
+            <h5>Bình luận</h5>
+            <div id="comment-container"></div>
         </div>
 
         <!-- Input area for new comment (fixed at the bottom) -->
         <div class="input-group" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background-color: #f8f9fa;">
+            <!-- Nút mention "@" -->
+            <button class="btn btn-light" type="button" id="mention-button" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag bạn bè">
+                <i class="bi bi-at"></i>
+            </button>
+
+            <!-- Nút emoji -->
+            <div class="btn-group dropup">
+                <button class="btn btn-light" type="button" id="emoji-button" data-bs-toggle="tooltip" data-bs-placement="top" title="Chèn emoji">
+                    <i class="bi bi-emoji-smile"></i>
+                </button>
+                <!-- Khung chọn emoji (ẩn mặc định) -->
+                <div id="emoji-picker" class="position-absolute bg-white border p-2" style="display:none; bottom:60px; left:10px; border-radius: 8px; width:250px; max-height:200px; overflow:auto;">
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">😀</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">😁</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">😂</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">😍</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">😘</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">👍</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">🔥</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">🎉</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">😎</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">🥳</span>
+                    <span class="emoji" style="cursor: pointer; font-size: 1.5rem; margin:5px;">🤩</span>
+
+                </div>
+
+            </div>
+
+            <!-- Input comment -->
             <input id="comment-input" type="text" class="form-control" placeholder="Nhập bình luận..." aria-label="Nhập bình luận">
+
+            <!-- Nút gửi -->
             <button id="send-comment" class="btn btn-primary" type="button">Gửi</button>
         </div>
+
     </div>
 
     <!-- Buttons for navigating videos (outside the video, on the right) -->
     <div class="d-flex flex-column ms-4" style="gap: 2rem;">
         <button id="prev-button" class="btn btn-light rounded-circle shadow-sm p-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5"/>
-            </svg>
+            <i class="bi bi-arrow-up"></i>
         </button>
         <button id="next-button" class="btn btn-light rounded-circle shadow-sm p-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
-            </svg>
+            <i class="bi bi-arrow-down"></i>
         </button>
     </div>
 
@@ -168,235 +326,312 @@
          style="width: 30%; height: 80%; background-color: #f8f9fa;">
         <!-- Button Close ("X") -->
         <button id="close-description" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"></button>
-
         <!-- Description Container -->
         <div id="description-container" class="position-relative w-100 h-100 p-3 overflow-auto">
-            <h5>Nội dung mô tả</h5>
             <!-- Video title -->
-            <p id="video-title" class="fw-bold"></p>
-            <!-- Likes, Comments, Score, and User -->
-            <p>
-                Lượt thích: <span id="like-count-description"></span> |
-                Số bình luận: <span id="comment-count-description"></span> |
-                Số điểm: <span id="score-description"></span> |
-                Người đăng: <span id="uploader"></span>
-            </p>
+            <h5 id="video-title" class="fw-bold mb-4">Nội dung mô tả</h5>
+
+            <!-- Thông tin số liệu -->
+            <div class="d-flex justify-content-around text-center mb-4">
+                <!-- Lượt thích -->
+                <div>
+                    <div class="fs-2 fw-bold" id="like-count-description">0</div>
+                    <div class="text-muted small">Lượt thích</div>
+                </div>
+                <!-- Số bình luận -->
+                <div>
+                    <div class="fs-2 fw-bold" id="comment-count-description">0</div>
+                    <div class="text-muted small">Số bình luận</div>
+                </div>
+                <!-- Người đăng -->
+                <div>
+                    <div class="fs-5 fw-bold" id="uploader">Người đăng</div>
+                    <div class="text-muted small">Người đăng</div>
+                </div>
+            </div>
         </div>
+
     </div>
     <!-- Modal structure -->
+
+    <!-- Modal cho nút Lưu vào danh sách phát -->
     <div class="modal fade" id="saveToPlaylistModal" tabindex="-1" aria-labelledby="saveToPlaylistLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- Modal header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="saveToPlaylistLabel">Lưu video vào</h5>
+                    <h5 class="modal-title" id="saveToPlaylistLabel">Lưu vào danh sách phát</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!-- Modal body -->
-                <div class="modal-body">
-                    <!-- Playlist options -->
-                    <div class="form-check d-flex justify-content-between align-items-center">
-                        <div>
-                            <input class="form-check-input" type="checkbox" id="watchLater">
-                            <label class="form-check-label" for="watchLater">Xem sau</label>
-                        </div>
-                        <button class="btn btn-light p-0" id="watchLaterPrivacy">
-                            <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
-                        </button>
+                <div class="modal-body p-0">
+                    <!-- Danh sách các playlist -->
+                    <div class="list-group">
+                        <!-- Mẫu cho một playlist -->
+                        {% for playlist in playlists %}
+                            <label class="list-group-item d-flex align-items-center">
+                                <input class="form-check-input me-3" type="checkbox" value="{{ playlist.id }}" {% if playlist.contains_video %}checked{% endif %}/>
+                                <div class="flex-grow-1">
+                                    <div>{{ playlist.name }}</div>
+                                    {% if playlist.is_private %}
+                                        <small class="text-muted">Riêng tư</small>
+                                    {% else %}
+                                        <small class="text-muted">Công khai</small>
+                                    {% endif %}
+                                </div>
+                                <i class="bi bi-lock-fill ms-auto"></i>
+                            </label>
+                        {% endfor %}
                     </div>
-                    <div class="form-check d-flex justify-content-between align-items-center">
-                        <div>
-                            <input class="form-check-input" type="checkbox" id="playlist1">
-                            <label class="form-check-label" for="playlist1">Danh sách phát 1</label>
-                        </div>
-                        <button class="btn btn-light p-0" id="playlist1Privacy">
-                            <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
-                        </button>
-                    </div>
-                    <div class="form-check d-flex justify-content-between align-items-center">
-                        <div class="form-check d-flex justify-content-between align-items-center">
-                            <div>
-                                <input class="form-check-input" type="checkbox" id="playlist2">
-                                <label class="form-check-label" for="playlist2">Danh sách phát 2</label>
-                            </div>
-                            <button class="btn btn-light p-0" id="playlist2Privacy">
-                                <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
-                            </button>
-                        </div>
-                    <div class="form-check d-flex justify-content-between align-items-center">
-                        <div>
-                            <input class="form-check-input" type="checkbox" id="playlist3">
-                            <label class="form-check-label" for="playlist3">Danh sách phát 3</label>
-                        </div>
-                        <button class="btn btn-light p-0" id="playlist3Privacy">
-                            <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
-                        </button>
-                    </div>
-                    <!-- Add new playlist -->
-                    <div class="d-flex justify-content-center mt-3">
-                        <button id="addNewPlaylist" class="btn btn-outline-secondary w-100">
+                    <!-- Nút tạo playlist mới -->
+                    <div class="d-flex justify-content-center my-3">
+                        <button id="addNewPlaylist" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#createPlaylistModal">
                             + Danh sách phát mới
                         </button>
                     </div>
-
-
-                    <!-- Modal for creating a new playlist -->
-                    <div class="modal fade" id="createPlaylistModal" tabindex="-1" aria-labelledby="createPlaylistLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <!-- Modal header -->
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="createPlaylistLabel">Danh sách phát mới</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <!-- Playlist title input -->
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="playlistTitle" placeholder="Chọn một tiêu đề"></textarea>
-                                    </div>
-
-                                    <!-- Select for privacy settings -->
-                                    <div class="mb-3">
-                                        <label for="privacySelect" class="form-label">Chế độ hiển thị</label>
-                                        <select class="form-select" id="privacySelect">
-                                            <option value="public">
-                                                <i class="bi bi-globe"></i> Công khai: Mọi người có thể tìm kiếm hoặc xem
-                                            </option>
-                                            <option value="private">
-                                                <i class="bi bi-lock-fill"></i> Riêng tư: Chỉ có bạn có thể xem
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Modal footer with buttons -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                                        <button type="button" class="btn btn-primary" id="createPlaylistButton">Tạo</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal for sharing video -->
-    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <!-- Modal tạo playlist mới -->
+    <div class="modal fade" id="createPlaylistModal" tabindex="-1" aria-labelledby="createPlaylistLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <!-- Modal header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="shareModalLabel">Chia sẻ</h5>
+                    <h5 class="modal-title" id="createPlaylistLabel">Tạo danh sách phát mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-                <!-- Modal body with social icons -->
+                <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <!-- Left arrow -->
-                        <button class="btn btn-light" id="prev-icon">
-                            <i class="bi bi-chevron-left"></i>
-                        </button>
+                    <!-- Tiêu đề playlist -->
+                    <div class="mb-3">
+                        <label for="playlistTitle" class="form-label">Tiêu đề</label>
+                        <input type="text" class="form-control" id="playlistTitle" placeholder="Nhập tiêu đề">
+                    </div>
+                    <!-- Quyền riêng tư -->
+                    <div class="mb-3">
+                        <label class="form-label">Quyền riêng tư</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="privacyOptions" id="privacyPublic" value="public" checked>
+                            <label class="form-check-label d-flex justify-content-between align-items-center" for="privacyPublic">
+                                Công khai
+                                <i class="bi bi-globe fs-5"></i>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="privacyOptions" id="privacyPrivate" value="private">
+                            <label class="form-check-label d-flex justify-content-between align-items-center" for="privacyPrivate">
+                                Riêng tư
+                                <i class="bi bi-lock-fill fs-5"></i>
+                            </label>
+                        </div>
+                    </div>
 
-                        <!-- Social icons container -->
-                        <div class="d-flex overflow-auto mx-2" id="social-icons">
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.facebook.com/login', '_blank')">
-                                    <i class="bi bi-facebook"></i>
-                                </button>
-                                <p class="small">Facebook</p>
+                    <!-- Nút tạo -->
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary" id="createPlaylistButton">Tạo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal thông báo Phụ đề -->
+    <div class="modal fade" id="subtitleModal" tabindex="-1" aria-labelledby="subtitleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="subtitleModalLabel">Phụ đề</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Video này không có phụ đề.
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Báo vi phạm -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Báo video vi phạm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="reportForm">
+                        <!-- Danh sách lý do vi phạm -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason1" value="Nội dung khiêu dâm" required>
+                                <label class="form-check-label" for="reason1">
+                                    Nội dung khiêu dâm
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.pinterest.com/login/', '_blank')">
-                                    <i class="bi bi-pinterest"></i>
-                                </button>
-                                <p class="small">Pinterest</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason2" value="Nội dung bạo lực hoặc phản cảm" required>
+                                <label class="form-check-label" for="reason2">
+                                    Nội dung bạo lực hoặc phản cảm
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.whatsapp.com/', '_blank')">
-                                    <i class="bi bi-whatsapp"></i>
-                                </button>
-                                <p class="small">Whatsapp</p>
+                            <!-- Thêm các lý do khác tương tự -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason3" value="Nội dung lăng mạ hoặc kích động thù hận" required>
+                                <label class="form-check-label" for="reason3">
+                                    Nội dung lăng mạ hoặc kích động thù hận
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://twitter.com/login', '_blank')">
-                                    <i class="bi bi-twitter"></i>
-                                </button>
-                                <p class="small">X</p>
+                            <!-- ... (tiếp tục cho đến lý do cuối cùng) -->
+                            <!-- Ví dụ cho các lý do còn lại -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason4" value="Nội dung quấy rối hoặc bắt nạt" required>
+                                <label class="form-check-label" for="reason4">
+                                    Nội dung quấy rối hoặc bắt nạt
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('mailto:', '_blank')">
-                                    <i class="bi bi-envelope"></i>
-                                </button>
-                                <p class="small">Gửi email</p>
+                            <!-- Tiếp tục cho các lý do khác -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason5" value="Hành động gây hại hoặc nguy hiểm" required>
+                                <label class="form-check-label" for="reason5">
+                                    Hành động gây hại hoặc nguy hiểm
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.kakaocorp.com/service/KakaoTalk', '_blank')">
-                                    <i class="bi bi-chat-dots"></i>
-                                </button>
-                                <p class="small">KakaoTalk</p>
+                            <!-- Thêm các lý do còn lại -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason6" value="Thông tin sai lệch" required>
+                                <label class="form-check-label" for="reason6">
+                                    Thông tin sai lệch
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.reddit.com/login/', '_blank')">
-                                    <i class="bi bi-reddit"></i>
-                                </button>
-                                <p class="small">Reddit</p>
+                            <!-- ... và tiếp tục cho đến hết danh sách -->
+                            <!-- Ví dụ các lý do cuối cùng -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason7" value="Nội dung liên quan đến việc ngược đãi trẻ em" required>
+                                <label class="form-check-label" for="reason7">
+                                    Nội dung liên quan đến việc ngược đãi trẻ em
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.linkedin.com/login', '_blank')">
-                                    <i class="bi bi-linkedin"></i>
-                                </button>
-                                <p class="small">LinkedIn</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason8" value="Nội dung quảng bá chủ nghĩa khủng bố" required>
+                                <label class="form-check-label" for="reason8">
+                                    Nội dung quảng bá chủ nghĩa khủng bố
+                                </label>
                             </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.tumblr.com/login', '_blank')">
-                                    <i class="bi bi-tumblr"></i>
-                                </button>
-                                <p class="small">Tumblr</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason9" value="Nội dung gian lận/vi phạm hoặc gây hiểu lầm" required>
+                                <label class="form-check-label" for="reason9">
+                                    Nội dung gian lận/vi phạm hoặc gây hiểu lầm
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason10" value="Vấn đề pháp lý" required>
+                                <label class="form-check-label" for="reason10">
+                                    Vấn đề pháp lý
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="violationReason" id="reason11" value="Phụ đề có vấn đề" required>
+                                <label class="form-check-label" for="reason11">
+                                    Phụ đề có vấn đề
+                                </label>
                             </div>
                         </div>
+                        <!-- Thông báo xác nhận (ẩn ban đầu) -->
+                        <div id="reportConfirmation" class="alert alert-success d-none" role="alert">
+                            Video đã được báo vi phạm.
+                            <br>
+                            Nội dung vi phạm: <span id="selectedReason"></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="button" class="btn btn-danger" id="submitReportButton">Báo vi phạm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feedback Section (Initially hidden) -->
+    <div id="feedback-section" class="position-relative bg-white shadow rounded overflow-hidden d-flex flex-column align-items-start p-4 mb-4 d-none"
+         style="width: 30%; height: 80%; background-color: #f8f9fa; position: fixed; right: 0; top: 10%; z-index: 1050;">
+        <!-- Button Close ("X") -->
+        <button id="close-feedback" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"></button>
 
-                        <!-- Right arrow -->
-                        <button class="btn btn-light" id="next-icon">
-                            <i class="bi bi-chevron-right"></i>
-                        </button>
-                    </div>
+        <!-- Feedback Content -->
+        <h5 class="mb-3">Gửi phản hồi đến YouTube</h5>
+        <div class="mb-3">
+            <label for="feedback-text" class="form-label">Mô tả ý kiến phản hồi của bạn:</label>
+            <textarea id="feedback-text" class="form-control" rows="5" placeholder="Hãy cho chúng tôi biết điều gì khiến bạn đưa ra ý kiến phản hồi này"></textarea>
+        </div>
+        <!-- Optional screenshot button -->
+        <div class="mb-3">
+            <label class="form-label">Ảnh chụp màn hình sẽ giúp chúng tôi hiểu rõ hơn về ý kiến phản hồi của bạn. (không bắt buộc)</label>
+            <button id="screenshot-button" class="btn btn-secondary">Chụp ảnh màn hình</button>
+        </div>
+        <!-- Informational text -->
+        <div class="mb-3 text-muted" style="font-size: 0.9em;">
+            Một số thông tin về tài khoản và hệ thống có thể được gửi đến Google. Chúng tôi sẽ sử dụng thông tin đó để khắc phục vấn đề và cải thiện dịch vụ, theo <a href="#">Chính sách quyền riêng tư</a> và <a href="#">Điều khoản dịch vụ</a> của chúng tôi. Có thể chúng tôi sẽ email cho bạn khi có thông tin khác hoặc nội dung cập nhật. Hãy truy cập trang <a href="#">Trợ giúp về Pháp lý</a> để yêu cầu thay đổi nội dung vì lý do pháp lý.
+        </div>
+        <!-- Send button -->
+        <button id="send-feedback-button" class="btn btn-primary">Gửi</button>
 
-                    <!-- Box with link and copy button -->
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="share-link" value="" readonly>
-                        <button class="btn btn-primary" id="copy-button">Sao chép</button>
-                    </div>
+        <!-- Thank you message (Initially hidden) -->
+        <div id="feedback-thank-you" class="mt-3 alert alert-success d-none" role="alert">
+            Cảm ơn bạn đã phản hồi.
+        </div>
+    </div>
+    <!-- Modal Cảnh Báo Vi Phạm Bình Luận -->
+    <div class="modal fade" id="violationWarningModal" tabindex="-1" aria-labelledby="violationWarningModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal header -->
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center" id="violationWarningModalLabel">
+                        <i class="bi bi-exclamation-triangle-fill text-danger me-2" style="font-size: 1.5rem;"></i> Cảnh Báo
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p class="fw-bold fs-5">Bình luận của bạn vi phạm Tiêu chuẩn cộng đồng của chúng tôi</p>
+                    <p>Không ai khác có thể nhìn thấy bình luận của bạn.</p>
+                    <p>Tiêu chuẩn cộng đồng áp dụng cho toàn người dùng, đồng thời giúp ứng dụng của chúng tôi thân thiện với mọi người.</p>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
     </div>
 
 
-
-
 </div>
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/video.css">
-<!-- Bootstrap JS and dependencies (Popper.js) -->
-{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
-
 <script>
+    let sessionUser = {
+        id: null
+    };
     {% if session['user'] %}
-        const sessionUser = {{ session['user']|tojson }};
-    {% else %}
-        const sessionUser = null;
+        sessionUser = {{ session['user']|tojson }};
+        sessionId = sessionUser.id.toString();
     {% endif %}
 </script>
 
-<script src="/static/js/user/video/video.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+<script src="/static/js/user/video/video_variable.js"></script>
+<script src="/static/js/user/video/video_like_toggle_button.js"></script>
+<script src="/static/js/user/video/video_button_add_event.js"></script>
+<script src="/static/js/user/video/video_comment_render.js"></script>
+<script src="/static/js/user/video/video_comment_function.js"></script>
+<script src="/static/js/user/video/video_comment_add_event.js"></script>
+<script src="/static/js/user/video/video_player.js"></script>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Cài đặt</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        /* Tùy chỉnh CSS nếu cần */
+        .sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .settings-header {
+            margin-bottom: 20px;
+        }
+        .accordion-button::after {
+            background-image: none;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .section-content {
+            margin-bottom: 30px;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        /* Hiệu ứng cho modal */
+        .modal-content {
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 sidebar">
+            {% include 'components/user/sidebar.html' %}
+        </div>
+        <!-- Nội dung chính -->
+        <div class="col-md-9 mt-4">
+            <!-- Header Section -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="settings-header">Chọn cách bạn xuất hiện và nội dung bạn muốn xem trên YourTube</h2>
+                    <!-- Thay đổi URL hình ảnh dưới đây bằng hình ảnh bạn muốn sử dụng -->
+                    <img src="{{ url_for('static', filename='image/setting-image/images.png') }}" alt="Hình ảnh minh họa" class="img-fluid" style="max-width: 150px;">
+                </div>
+                <p>Đăng nhập bằng <strong>{{ user.username }}</strong></p>
+            </div>
+
+            <!-- Accordion for Settings -->
+            <div class="accordion" id="settingsAccordion">
+                <!-- Cài đặt Tài khoản -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingAccount">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAccount" aria-expanded="true" aria-controls="collapseAccount">
+                            Tài khoản
+                        </button>
+                    </h2>
+                    <div id="collapseAccount" class="accordion-collapse collapse show" aria-labelledby="headingAccount" data-bs-parent="#settingsAccordion">
+                        <div class="accordion-body">
+                            <input type="hidden" id="csrf_token_account" value="{{ csrf_token }}">
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Tên người dùng</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="public_profile" name="public_profile" {% if user.public_profile %}checked{% endif %}>
+                                <label class="form-check-label" for="public_profile">
+                                    Hồ sơ công khai
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="updateAccountButton">
+                                <span id="updateAccountButtonText">Cập nhật</span>
+                                <span id="updateAccountButtonSpinner" class="spinner-border spinner-border-sm text-light d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cài đặt Quyền riêng tư -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingPrivacy">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrivacy" aria-expanded="false" aria-controls="collapsePrivacy">
+                            Quyền riêng tư
+                        </button>
+                    </h2>
+                    <div id="collapsePrivacy" class="accordion-collapse collapse" aria-labelledby="headingPrivacy" data-bs-parent="#settingsAccordion">
+                        <div class="accordion-body">
+                            <h5>Quản lý nội dung mà bạn chia sẻ trên YouTube</h5>
+                            <p>Chọn người có thể xem kênh đăng ký của bạn</p>
+                            <p><a href="https://www.youtube.com/t/terms" target="_blank">Xem xét Điều khoản dịch vụ của YouTube</a> và <a href="https://policies.google.com/privacy" target="_blank">Chính sách quyền riêng tư của Google</a></p>
+
+                            <!-- Kênh đăng ký -->
+                            <hr>
+                            <h6>Kênh đăng ký</h6>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="privateSubscriptions" name="private_subscriptions" {% if user.private_subscriptions %}checked{% endif %}>
+                                <label class="form-check-label" for="privateSubscriptions">
+                                    Đặt tất cả các kênh đăng ký của tôi ở chế độ riêng tư
+                                </label>
+                            </div>
+                            <p class="small text-muted">
+                                Người khác sẽ không thể thấy danh sách kênh đăng ký của bạn, trừ phi bạn dùng những tính năng khiến danh sách này xuất hiện công khai. <a href="https://support.google.com/youtube/answer/7280190" target="_blank">Tìm hiểu thêm về các tính năng khiến danh sách kênh đăng ký xuất hiện công khai</a> hoặc <a href="https://support.google.com/youtube/answer/6080546" target="_blank">tìm hiểu cách quản lý danh sách kênh đăng ký tại đây</a>.
+                            </p>
+
+                            <!-- Quảng cáo trên YouTube -->
+                            <hr>
+                            <h6>Quảng cáo trên YouTube</h6>
+                            <p>
+                                Bạn có thể thấy quảng cáo trên YouTube dựa trên các yếu tố chung, chẳng hạn như chủ đề video. Các quảng cáo mà bạn nhìn thấy cũng có thể dựa trên những lựa chọn của bạn trong <a href="https://myadcenter.google.com/" target="_blank">Trung tâm quảng cáo của tôi</a>. Để tìm hiểu thêm về cách quảng cáo hoạt động trên tài khoản gia đình có trẻ em, hãy truy cập vào <a href="https://support.google.com/families/answer/12704127" target="_blank">Trung tâm trợ giúp của Google cho Gia đình</a>.
+                            </p>
+
+                            <!-- Nút Lưu Thay Đổi -->
+                            <button type="button" class="btn btn-primary" id="updatePrivacyButton">
+                                <span id="updatePrivacyButtonText">Lưu thay đổi</span>
+                                <span id="updatePrivacyButtonSpinner" class="spinner-border spinner-border-sm text-light d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mục cài đặt khác giống YouTube -->
+                <!-- Kênh YouTube của bạn -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingYouTubeChannel">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseYouTubeChannel" aria-expanded="false" aria-controls="collapseYouTubeChannel">
+                            Kênh YouTube của bạn
+                        </button>
+                    </h2>
+                    <div id="collapseYouTubeChannel" class="accordion-collapse collapse" aria-labelledby="headingYouTubeChannel" data-bs-parent="#settingsAccordion">
+                        <div class="accordion-body">
+                            <!-- Chức năng phát và hiệu suất -->
+                            <h5>Chức năng phát và hiệu suất</h5>
+                            <p>Kiểm soát trải nghiệm xem video của bạn</p>
+                            <p class="text-muted">Các tùy chọn cài đặt phát lại chỉ áp dụng cho trình duyệt này</p>
+
+                            <!-- Thẻ thông tin -->
+                            <hr>
+                            <h6>Thẻ thông tin</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="showInfoCards" {% if user.show_info_cards %}checked{% endif %}>
+                                <label class="form-check-label" for="showInfoCards">
+                                    Hiển thị thẻ thông tin trong video
+                                </label>
+                            </div>
+
+                            <!-- Phụ đề -->
+                            <hr>
+                            <h6>Phụ đề</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="alwaysShowCaptions" {% if user.always_show_captions %}checked{% endif %}>
+                                <label class="form-check-label" for="alwaysShowCaptions">
+                                    Luôn hiện phụ đề
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="includeAutoGenerated" {% if user.include_auto_generated %}checked{% endif %}>
+                                <label class="form-check-label" for="includeAutoGenerated">
+                                    Bao gồm cả phụ đề được tạo tự động (nếu có)
+                                </label>
+                            </div>
+
+                            <!-- Cài đặt AV1 -->
+                            <hr>
+                            <h6>Cài đặt AV1</h6>
+                            {% set av1_setting = user.av1_setting or 'auto' %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="av1Setting" id="av1Auto" value="auto" {% if av1_setting == 'auto' %}checked{% endif %}>
+                                <label class="form-check-label" for="av1Auto">
+                                    Tự động (khuyên dùng)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="av1Setting" id="av1PreferSd" value="prefer_sd" {% if av1_setting == 'prefer_sd' %}checked{% endif %}>
+                                <label class="form-check-label" for="av1PreferSd">
+                                    Ưu tiên dùng AV1 cho chế độ SD
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="av1Setting" id="av1Always" value="always" {% if av1_setting == 'always' %}checked{% endif %}>
+                                <label class="form-check-label" for="av1Always">
+                                    Luôn ưu tiên AV1
+                                </label>
+                            </div>
+
+                            <!-- Duyệt web -->
+                            <hr>
+                            <h6>Duyệt web</h6>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="videoPreview" {% if user.video_preview %}checked{% endif %}>
+                                <label class="form-check-label" for="videoPreview">
+                                    Đoạn xem trước video
+                                </label>
+                            </div>
+                            <p class="small text-muted">Đoạn xem trước video sẽ phát khi bạn di chuột lên hình thu nhỏ</p>
+
+                            <!-- Nút Lưu Thay Đổi -->
+                            <button type="button" class="btn btn-primary mt-3" id="updatePlaybackButton">
+                                <span id="updatePlaybackButtonText">Lưu thay đổi</span>
+                                <span id="updatePlaybackButtonSpinner" class="spinner-border spinner-border-sm text-light d-none" role="status" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tài khoản Google -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingGoogleAccount">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGoogleAccount" aria-expanded="false" aria-controls="collapseGoogleAccount">
+                            Tài khoản Google
+                        </button>
+                    </h2>
+                    <div id="collapseGoogleAccount" class="accordion-collapse collapse" aria-labelledby="headingGoogleAccount" data-bs-parent="#settingsAccordion">
+                        <div class="accordion-body">
+                            <p>Bạn đăng nhập vào YouTube bằng Tài khoản Google của mình</p>
+                            <div class="mb-3">
+                                <a href="https://myaccount.google.com/" class="btn btn-outline-primary" target="_blank">Xem hoặc thay đổi các tùy chọn cài đặt cho Tài khoản Google của bạn</a>
+                                <p>Bạn sẽ được chuyển đến trang Tài khoản Google của mình</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trung tâm dành cho gia đình -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFamilyCenter">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFamilyCenter" aria-expanded="false" aria-controls="collapseFamilyCenter">
+                            Trung tâm dành cho gia đình
+                        </button>
+                    </h2>
+                    <div id="collapseFamilyCenter" class="accordion-collapse collapse" aria-labelledby="headingFamilyCenter" data-bs-parent="#settingsAccordion">
+                        <div class="accordion-body">
+                            <input type="hidden" id="user_id" value="{{ user.id }}">
+                            <p>Các công cụ giúp kết nối cha mẹ, trẻ em và thanh thiếu niên trên YouTube.</p>
+                            <div class="mb-3">
+                                <a href="https://families.youtube.com/?host_name=HOST_CLIENT_NAME_MAIN_WEB&feature=parent_tools" class="btn btn-outline-primary" target="_blank">Quản lý hồ sơ dành cho trẻ em và các tính năng dành cho thanh thiếu niên</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tư cách thành viên -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingMembership">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMembership" aria-expanded="false" aria-controls="collapseMembership">
+                            Tư cách thành viên
+                        </button>
+                    </h2>
+                    <div id="collapseMembership" class="accordion-collapse collapse" aria-labelledby="headingMembership" data-bs-parent="#settingsAccordion">
+                        <div class="accordion-body">
+                            <p>
+                                <strong>Bạn chưa phải thành viên</strong> |
+                                <a href="https://www.youtube.com/premium" class="btn btn-link">Hãy đăng ký gói YouTube Premium</a>
+                            </p>
+                            <p>YouTube Premium cho phép bạn nghe nhạc không gián đoạn, xem video không có quảng cáo và nhiều lợi ích khác.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hiển thị thông báo -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal Hiển Thị Thông Báo Thành Công -->
+<div class="modal fade" id="successAccountModal" tabindex="-1" aria-labelledby="successAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm"> <!-- Thêm lớp 'modal-dialog-centered' và 'modal-sm' -->
+        <div class="modal-content text-center"> <!-- Thêm lớp 'text-center' -->
+            <div class="modal-body">
+                <!-- Biểu tượng thành công -->
+                <div class="my-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.29 10.854l4.358-4.358a.5.5 0 1 0-.707-.707L6 9.793 4.354 8.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0z"/>
+                    </svg>
+                </div>
+                <h5 class="modal-title mb-2" id="successAccountModalLabel">Cập nhật thành công!</h5>
+                <p>Thông tin tài khoản của bạn đã được cập nhật.</p>
+                <button type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Hiển Thị Thông Báo Thành Công cho Quyền Riêng Tư -->
+<div class="modal fade" id="successPrivacyModal" tabindex="-1" aria-labelledby="successPrivacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-body">
+                <!-- Biểu tượng thành công -->
+                <div class="my-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.29 10.854l4.358-4.358a.5.5 0 1 0-.707-.707L6 9.793 4.354 8.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0z"/>
+                    </svg>
+                </div>
+                <h5 class="modal-title mb-2" id="successPrivacyModalLabel">Thay đổi thành công!</h5>
+                <p>Cài đặt quyền riêng tư của bạn đã được cập nhật.</p>
+                <button type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript để Hiển Thị Modal Khi Nhấn Nút "Cập nhật" với Loader và Yêu Cầu AJAX -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const updateAccountButton = document.getElementById('updateAccountButton');
+        const updateAccountButtonText = document.getElementById('updateAccountButtonText');
+        const updateAccountButtonSpinner = document.getElementById('updateAccountButtonSpinner');
+        const successAccountModal = new bootstrap.Modal(document.getElementById('successAccountModal'));
+
+        // Lấy user.id từ input ẩn
+        const userId = document.getElementById('user_id').value;
+
+        // Lấy CSRF token
+        const csrfToken = document.getElementById('csrf_token_account').value;
+
+        updateAccountButton.addEventListener('click', function() {
+            // Thu thập dữ liệu từ các trường nhập liệu
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const publicProfile = document.getElementById('public_profile').checked;
+            // Loại bỏ các trường không tồn tại hoặc thêm chúng vào nếu bạn đã thêm trong HTML
+
+            // Tạo một FormData để gửi dữ liệu
+            const formData = new FormData();
+            formData.append('id', userId);
+            formData.append('name', username);
+            formData.append('email', email);
+            formData.append('public_profile', publicProfile);
+            // Thêm các trường khác nếu cần
+
+            // Hiển thị Spinner và vô hiệu hóa nút
+            updateAccountButtonSpinner.classList.remove('d-none');
+            updateAccountButton.disabled = true;
+            // Đổi văn bản nút
+            updateAccountButtonText.textContent = 'Đang cập nhật...';
+
+            // Gửi dữ liệu đến backend bằng Fetch API
+            fetch('/api/user/profile/update', {
+                method: 'PUT',
+                headers: {
+                    'X-CSRFToken': csrfToken  // Thêm CSRF token vào headers
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setTimeout(function() {
+                    // Ẩn Spinner và bật lại nút
+                    updateAccountButtonSpinner.classList.add('d-none');
+                    updateAccountButton.disabled = false;
+                    // Đổi văn bản nút trở lại
+                    updateAccountButtonText.textContent = 'Cập nhật';
+
+                    if (data.message === 'User profile updated successfully') {
+                        // Hiển thị Modal thông báo thành công
+                        successAccountModal.show();
+                    } else {
+                        // Hiển thị thông báo lỗi
+                        alert(data.message || 'Có lỗi xảy ra khi cập nhật tài khoản.');
+                    }
+                    }, 2500);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Ẩn Spinner và bật lại nút
+                    updateAccountButtonSpinner.classList.add('d-none');
+                    updateAccountButton.disabled = false;
+                    // Đổi văn bản nút trở lại
+                    updateAccountButtonText.textContent = 'Cập nhật';
+
+                    // Hiển thị thông báo lỗi
+                    alert('Có lỗi xảy ra khi cập nhật tài khoản.');
+                });
+        });
+        const updatePrivacyButton = document.getElementById("updatePrivacyButton");
+        const updatePrivacyButtonText = document.getElementById("updatePrivacyButtonText");
+        const updatePrivacyButtonSpinner = document.getElementById("updatePrivacyButtonSpinner");
+        const successPrivacyModal = new bootstrap.Modal(document.getElementById("successPrivacyModal"));
+
+        updatePrivacyButton.addEventListener("click", function () {
+            // Thu thập dữ liệu từ các trường nhập liệu (nếu cần)
+            const privateSubscriptions = document.getElementById("privateSubscriptions").checked;
+
+            // Hiển thị Spinner và vô hiệu hóa nút
+            updatePrivacyButtonSpinner.classList.remove("d-none");
+            updatePrivacyButton.disabled = true;
+            // Đổi văn bản nút
+            updatePrivacyButtonText.textContent = "Đang lưu...";
+
+            // Thêm độ trễ 2.5 giây trước khi hiển thị modal
+            setTimeout(function () {
+                // Ẩn Spinner và bật lại nút
+                updatePrivacyButtonSpinner.classList.add("d-none");
+                updatePrivacyButton.disabled = false;
+                // Đổi văn bản nút trở lại
+                updatePrivacyButtonText.textContent = "Lưu thay đổi";
+
+                // Hiển thị Modal thông báo thành công
+                successPrivacyModal.show();
+            }, 2500); // 2500ms tương đương 2.5 giây
+        });
+        const updatePlaybackButton = document.getElementById("updatePlaybackButton");
+        const updatePlaybackButtonText = document.getElementById("updatePlaybackButtonText");
+        const updatePlaybackButtonSpinner = document.getElementById("updatePlaybackButtonSpinner");
+        const successPlaybackModal = new bootstrap.Modal(document.getElementById("successPlaybackModal"));
+
+        updatePlaybackButton.addEventListener("click", function () {
+            // Thu thập dữ liệu từ các trường nhập liệu
+            const showInfoCards = document.getElementById("showInfoCards").checked;
+            const alwaysShowCaptions = document.getElementById("alwaysShowCaptions").checked;
+            const includeAutoGenerated = document.getElementById("includeAutoGenerated").checked;
+            const av1SettingElement = document.querySelector('input[name="av1Setting"]:checked');
+            const av1Setting = av1SettingElement ? av1SettingElement.value : 'auto';
+            const videoPreview = document.getElementById("videoPreview").checked;
+
+            // Kiểm tra dữ liệu đã thu thập (tùy chọn)
+            console.log({
+                showInfoCards,
+                alwaysShowCaptions,
+                includeAutoGenerated,
+                av1Setting,
+                videoPreview
+            });
+
+            // Hiển thị Spinner và vô hiệu hóa nút
+            updatePlaybackButtonSpinner.classList.remove("d-none");
+            updatePlaybackButton.disabled = true;
+            updatePlaybackButtonText.textContent = "Đang lưu...";
+
+            // Thêm độ trễ 2.5 giây trước khi hiển thị modal
+            setTimeout(function () {
+                // Ẩn Spinner và bật lại nút
+                updatePlaybackButtonSpinner.classList.add("d-none");
+                updatePlaybackButton.disabled = false;
+                updatePlaybackButtonText.textContent = "Lưu thay đổi";
+
+                // Hiển thị Modal thông báo thành công
+                successPlaybackModal.show();
+            }, 2500);
+        });
+    });
+</script>
+</body>
+</html>

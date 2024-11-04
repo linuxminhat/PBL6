@@ -5,7 +5,7 @@ from flask import redirect, session, url_for
 from app.models.enum.account_role import AccountRole
 
 
-def login_required(role=AccountRole.USER.value):
+def login_required(role=AccountRole.USER):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
@@ -13,7 +13,6 @@ def login_required(role=AccountRole.USER.value):
                 return redirect(url_for('home.index'))
 
             user_role = session['user'].get('role')
-
             # Handle both a single role and a list of roles
             if isinstance(role, list):
                 # If it's a list, check if the user's role is in the allowed roles

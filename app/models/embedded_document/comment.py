@@ -15,7 +15,7 @@ class Comment(EmbeddedDocument):
     child_count = IntField(default=0)
     created_at = DateTimeField(default=datetime.now())
 
-    def jsonify(self):
+    def jsonify(self, current_user=None):
         user = self.user.fetch()
         father_comment_user = self.father_comment_user.fetch() if self.father_comment_user else None
 
@@ -32,6 +32,8 @@ class Comment(EmbeddedDocument):
             'like_count': self.like_count,
             'child_count': self.child_count,
             'created_at': self.created_at,
+            # Thêm trường user_has_liked mặc định là False
+            'user_has_liked': False
         }
 
         if father_comment_user:
@@ -39,6 +41,10 @@ class Comment(EmbeddedDocument):
                 'id': str(father_comment_user.id),
                 'name': father_comment_user.name
             }
+        # Nếu có current_user => kiểm tra like_comments
+        if current_user:
+            if self._id in current_user.like_comments:
+                json['user_has_liked'] = True
 
         return json
 
