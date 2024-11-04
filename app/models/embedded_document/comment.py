@@ -14,6 +14,8 @@ class Comment(EmbeddedDocument):
     deleted_at = DateTimeField(default=None)
 
     def jsonify(self):
+        user = self.user.fetch()
+
         return {
             'id': str(self._id),
             'user': self.user.fetch().jsonify(),
@@ -26,3 +28,15 @@ class Comment(EmbeddedDocument):
     @property
     def id(self):
         return self._id
+
+    @classmethod
+    def from_dict(cls, **data):
+        return cls(
+            _id=data.get('_id'),
+            user=data.get('user'),
+            content=data.get('content'),
+            to_comment=data.get('to_comment'),
+            like_count=data.get('like_count', 0),
+            created_at=data.get('created_at'),
+            deleted_at=data.get('deleted_at')
+        )

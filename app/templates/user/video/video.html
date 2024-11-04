@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/static/css/user/video/video.css">
+
 <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
     <!-- Left region for new features (5 buttons) -->
     <div class="d-flex flex-column justify-content-center me-4"> <!-- space-y-8 increases space between buttons -->
@@ -11,7 +13,7 @@
                     {% endif %}
                     class="btn btn-light rounded-circle shadow-sm p-3">
                 {# <button id="like-button" class="btn btn-light rounded-circle shadow-sm p-3"> <!-- w-30 h-30 increases button size -->#}
-                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
                     <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
                 </svg>
             </button>
@@ -53,7 +55,7 @@
                 </svg>
             </button>
         </div>
-    <!-- Button setting -->
+        <!-- Button setting -->
         <div class="dropup">
             <button id="settings-button" class="btn btn-light rounded-circle shadow-sm p-3" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- Settings icon (SVG) -->
@@ -223,180 +225,167 @@
                                 <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
                             </button>
                         </div>
-                    <div class="form-check d-flex justify-content-between align-items-center">
-                        <div>
-                            <input class="form-check-input" type="checkbox" id="playlist3">
-                            <label class="form-check-label" for="playlist3">Danh sách phát 3</label>
+                        <div class="form-check d-flex justify-content-between align-items-center">
+                            <div>
+                                <input class="form-check-input" type="checkbox" id="playlist3">
+                                <label class="form-check-label" for="playlist3">Danh sách phát 3</label>
+                            </div>
+                            <button class="btn btn-light p-0" id="playlist3Privacy">
+                                <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
+                            </button>
                         </div>
-                        <button class="btn btn-light p-0" id="playlist3Privacy">
-                            <i class="bi bi-globe"></i> <!-- Icon Công khai mặc định -->
-                        </button>
-                    </div>
-                    <!-- Add new playlist -->
-                    <div class="d-flex justify-content-center mt-3">
-                        <button id="addNewPlaylist" class="btn btn-outline-secondary w-100">
-                            + Danh sách phát mới
-                        </button>
-                    </div>
+                        <!-- Add new playlist -->
+                        <div class="d-flex justify-content-center mt-3">
+                            <button id="addNewPlaylist" class="btn btn-outline-secondary w-100">
+                                + Danh sách phát mới
+                            </button>
+                        </div>
 
 
-                    <!-- Modal for creating a new playlist -->
-                    <div class="modal fade" id="createPlaylistModal" tabindex="-1" aria-labelledby="createPlaylistLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <!-- Modal header -->
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="createPlaylistLabel">Danh sách phát mới</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!-- Modal for creating a new playlist -->
+                        <div class="modal fade" id="createPlaylistModal" tabindex="-1" aria-labelledby="createPlaylistLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <!-- Modal header -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="createPlaylistLabel">Danh sách phát mới</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <!-- Playlist title input -->
+                                        <div class="mb-3">
+                                            <textarea class="form-control" id="playlistTitle" placeholder="Chọn một tiêu đề"></textarea>
+                                        </div>
+
+                                        <!-- Select for privacy settings -->
+                                        <div class="mb-3">
+                                            <label for="privacySelect" class="form-label">Chế độ hiển thị</label>
+                                            <select class="form-select" id="privacySelect">
+                                                <option value="public">
+                                                    <i class="bi bi-globe"></i> Công khai: Mọi người có thể tìm kiếm hoặc xem
+                                                </option>
+                                                <option value="private">
+                                                    <i class="bi bi-lock-fill"></i> Riêng tư: Chỉ có bạn có thể xem
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Modal footer with buttons -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                            <button type="button" class="btn btn-primary" id="createPlaylistButton">Tạo</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <!-- Playlist title input -->
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="playlistTitle" placeholder="Chọn một tiêu đề"></textarea>
-                                    </div>
-
-                                    <!-- Select for privacy settings -->
-                                    <div class="mb-3">
-                                        <label for="privacySelect" class="form-label">Chế độ hiển thị</label>
-                                        <select class="form-select" id="privacySelect">
-                                            <option value="public">
-                                                <i class="bi bi-globe"></i> Công khai: Mọi người có thể tìm kiếm hoặc xem
-                                            </option>
-                                            <option value="private">
-                                                <i class="bi bi-lock-fill"></i> Riêng tư: Chỉ có bạn có thể xem
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Modal footer with buttons -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                                        <button type="button" class="btn btn-primary" id="createPlaylistButton">Tạo</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal for sharing video -->
-    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- Modal header -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="shareModalLabel">Chia sẻ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <!-- Modal body with social icons -->
-                <div class="modal-body">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <!-- Left arrow -->
-                        <button class="btn btn-light" id="prev-icon">
-                            <i class="bi bi-chevron-left"></i>
-                        </button>
-
-                        <!-- Social icons container -->
-                        <div class="d-flex overflow-auto mx-2" id="social-icons">
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.facebook.com/login', '_blank')">
-                                    <i class="bi bi-facebook"></i>
-                                </button>
-                                <p class="small">Facebook</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.pinterest.com/login/', '_blank')">
-                                    <i class="bi bi-pinterest"></i>
-                                </button>
-                                <p class="small">Pinterest</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.whatsapp.com/', '_blank')">
-                                    <i class="bi bi-whatsapp"></i>
-                                </button>
-                                <p class="small">Whatsapp</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://twitter.com/login', '_blank')">
-                                    <i class="bi bi-twitter"></i>
-                                </button>
-                                <p class="small">X</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('mailto:', '_blank')">
-                                    <i class="bi bi-envelope"></i>
-                                </button>
-                                <p class="small">Gửi email</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.kakaocorp.com/service/KakaoTalk', '_blank')">
-                                    <i class="bi bi-chat-dots"></i>
-                                </button>
-                                <p class="small">KakaoTalk</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.reddit.com/login/', '_blank')">
-                                    <i class="bi bi-reddit"></i>
-                                </button>
-                                <p class="small">Reddit</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.linkedin.com/login', '_blank')">
-                                    <i class="bi bi-linkedin"></i>
-                                </button>
-                                <p class="small">LinkedIn</p>
-                            </div>
-                            <div class="text-center me-3">
-                                <button class="btn btn-light rounded-circle" onclick="window.open('https://www.tumblr.com/login', '_blank')">
-                                    <i class="bi bi-tumblr"></i>
-                                </button>
-                                <p class="small">Tumblr</p>
                             </div>
                         </div>
 
-                        <!-- Right arrow -->
-                        <button class="btn btn-light" id="next-icon">
-                            <i class="bi bi-chevron-right"></i>
-                        </button>
-                    </div>
-
-                    <!-- Box with link and copy button -->
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="share-link" value="" readonly>
-                        <button class="btn btn-primary" id="copy-button">Sao chép</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Modal for sharing video -->
+        <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="shareModalLabel">Chia sẻ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Modal body with social icons -->
+                    <div class="modal-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <!-- Left arrow -->
+                            <button class="btn btn-light" id="prev-icon">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+
+                            <!-- Social icons container -->
+                            <div class="d-flex overflow-auto mx-2" id="social-icons">
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.facebook.com/login', '_blank')">
+                                        <i class="bi bi-facebook"></i>
+                                    </button>
+                                    <p class="small">Facebook</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.pinterest.com/login/', '_blank')">
+                                        <i class="bi bi-pinterest"></i>
+                                    </button>
+                                    <p class="small">Pinterest</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.whatsapp.com/', '_blank')">
+                                        <i class="bi bi-whatsapp"></i>
+                                    </button>
+                                    <p class="small">Whatsapp</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://twitter.com/login', '_blank')">
+                                        <i class="bi bi-twitter"></i>
+                                    </button>
+                                    <p class="small">X</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('mailto:', '_blank')">
+                                        <i class="bi bi-envelope"></i>
+                                    </button>
+                                    <p class="small">Gửi email</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.kakaocorp.com/service/KakaoTalk', '_blank')">
+                                        <i class="bi bi-chat-dots"></i>
+                                    </button>
+                                    <p class="small">KakaoTalk</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.reddit.com/login/', '_blank')">
+                                        <i class="bi bi-reddit"></i>
+                                    </button>
+                                    <p class="small">Reddit</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.linkedin.com/login', '_blank')">
+                                        <i class="bi bi-linkedin"></i>
+                                    </button>
+                                    <p class="small">LinkedIn</p>
+                                </div>
+                                <div class="text-center me-3">
+                                    <button class="btn btn-light rounded-circle" onclick="window.open('https://www.tumblr.com/login', '_blank')">
+                                        <i class="bi bi-tumblr"></i>
+                                    </button>
+                                    <p class="small">Tumblr</p>
+                                </div>
+                            </div>
+
+                            <!-- Right arrow -->
+                            <button class="btn btn-light" id="next-icon">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Box with link and copy button -->
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="share-link" value="" readonly>
+                            <button class="btn btn-primary" id="copy-button">Sao chép</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
-
 </div>
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/video.css">
-<!-- Bootstrap JS and dependencies (Popper.js) -->
-{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
-
 <script>
+    let sessionUser = {
+        id: null
+    };
     {% if session['user'] %}
-        const sessionUser = {{ session['user']|tojson }};
-    {% else %}
-        const sessionUser = null;
+        sessionUser = {{ session['user']|tojson }};
     {% endif %}
 </script>
 
 <script src="/static/js/user/video/video.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">

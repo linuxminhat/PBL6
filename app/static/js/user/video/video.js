@@ -17,7 +17,7 @@ function loadVideo(index) {
         renderComments(video);
 
         // Cập nhật trạng thái liked và thay đổi màu nút like
-        liked = video.liked_by_user;
+        liked = video.liked;
         const likeButton = document.getElementById('like-button');
         if (liked) {
             likeButton.style.backgroundColor = 'black';
@@ -29,12 +29,12 @@ function loadVideo(index) {
     }
 }
 
-
-
 // Fetch the list of videos from the API using Axios
 function fetchVideos() {
-    axios.post(`${api_video}/get`, {userId: 1})
+    axios.post(`${api_video}/get`, {userId: sessionUser.id})
         .then(response => {
+            console.log(response.data);
+
             videos = response.data;
             if (videos.length > 0) {
                 loadVideo(0);  // Load the first video initially

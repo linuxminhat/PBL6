@@ -7,6 +7,27 @@ from models.embedded_document.comment import Comment
 
 
 class VideoQuerySet(QuerySet):
+    def get_random_videos(self, count, user_id: str = None):
+        total_videos = self.count()
+        sample_size = min(count, total_videos)
+        pipeline = [
+            {"$sample": {"size": sample_size}}
+        ]
+        video_lists = list(self.aggregate(*pipeline))
+        from models.video import Video
+
+        user = None
+        if user_id is not None:
+            user = ExtendedAccount.objects(id=user_id).first()
+
+        videos = []
+        for video_dict in video_lists:
+            video = Video.from_dict(**video_dict)
+            is_liked = ObjectId(video.id) in user.like_videos if user else False
+            videos.append((video, is_liked))
+
+        return videos
+
     def get_videos_by_user(self, user_id: str):
         return self.filter(user=user_id).all()
 
