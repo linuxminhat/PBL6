@@ -142,7 +142,7 @@ def search_music():
         # Catch any other error that occurs and return a 500 response
         return jsonify({'error': str(e)}), 500
 
-@api_user_video_bp.route('/get', methods=['GET'])
+@api_user_video_bp.route('/get', methods=['POST'])
 def get_video():
     videos = [video.jsonify() for video in Video.get_random_videos(5)]
     return jsonify(videos), 200

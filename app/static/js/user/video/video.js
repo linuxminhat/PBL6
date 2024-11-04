@@ -33,7 +33,7 @@ function loadVideo(index) {
 
 // Fetch the list of videos from the API using Axios
 function fetchVideos() {
-    axios.get(`${api_video}/get`)
+    axios.post(`${api_video}/get`, {userId: 1})
         .then(response => {
             videos = response.data;
             if (videos.length > 0) {
@@ -140,9 +140,6 @@ function video_like(userId) {
             .catch(error => console.error('Error liking the video:', error));
     }
 }
-
-
-
 
 function toggleComment() {
     const commentSection = document.getElementById('comment-section');
