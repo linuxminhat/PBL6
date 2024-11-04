@@ -3,6 +3,7 @@ from datetime import datetime
 from bson import ObjectId
 from mongoengine import DateTimeField, EmbeddedDocument, IntField, LazyReferenceField, ObjectIdField, StringField
 
+
 class Comment(EmbeddedDocument):
     _id = ObjectIdField(default=ObjectId, required=True, primary_key=True)
     user = LazyReferenceField('ExtendedAccount', required=True)
@@ -10,6 +11,7 @@ class Comment(EmbeddedDocument):
     content = StringField(required=True)
     like_count = IntField(default=0)
     created_at = DateTimeField(default=datetime.now())
+    deleted_at = DateTimeField(default=None)
 
     def jsonify(self):
         return {
@@ -20,3 +22,7 @@ class Comment(EmbeddedDocument):
             'like_count': self.like_count,
             'created_at': self.created_at,
         }
+
+    @property
+    def id(self):
+        return self._id
