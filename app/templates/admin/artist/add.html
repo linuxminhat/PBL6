@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% include "components/admin/sidebar.html" %}
+    <div class="flex-grow-1 d-flex flex-column overflow-hidden">
+        {% include "components/admin/topbar.html" %}
+        <main class="flex-grow-1 overflow-auto bg-light">
+            <div class="container px-4 py-5 d-flex align-items-center flex-column my-2">
+                {% block admin_content %}{% endblock %}
+
+
+                <h2 class="h2 fw-semibold text-dark mb-4">Add New Artist</h2>
+                <div class="bg-white shadow rounded p-4 mb-4">
+                    <form method="POST" action="{{ url_for('admin.artist.add') }}">
+                        {{ form.hidden_tag() }}
+                            <div class="row">
+                                <div class="col-12">
+                                    {{ form.name.label(class="form-label fw-bold") }}
+                                    {{ form.name(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    {{ form.avatar_uri.label(class="form-label fw-bold") }}
+                                    {{ form.avatar_uri(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {{ form.email.label(class="form-label fw-bold") }}
+                                    {{ form.email(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-center">
+                                    {{ form.submit(class="btn btn-primary") }}
+                            </div>
+                    </form>
+                </div>
+
+
+
+{% endblock %}

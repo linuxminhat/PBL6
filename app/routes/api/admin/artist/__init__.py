@@ -1,8 +1,15 @@
+from datetime import datetime
 from flask import Blueprint, jsonify, request
 
 from app.models.artist import Artist
 
 api_admin_artist_bp = Blueprint('api_admin_artist', __name__)
+
+
+@api_admin_artist_bp.route('/find_all', methods=['GET'])
+def find_all():
+    artists = Artist.objects.all()
+    return jsonify([artist.to_json() for artist in artists]), 200
 
 @api_admin_artist_bp.route('/', methods=['POST'])
 def add():
@@ -25,7 +32,6 @@ def update():
         artist.date_of_birth = data['date_of_birth']
     artist.save()
     return jsonify({'message': 'Artist updated successfully'}), 200
-
 
 @api_admin_artist_bp.route('/', methods=['DELETE'])
 def delete():

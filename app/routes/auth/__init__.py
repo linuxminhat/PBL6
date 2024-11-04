@@ -26,6 +26,7 @@ def login():
                 return redirect(url_for('auth.login'))
             if chk is True:
                 session['user'] = account.jsonify()
+                print(session['user'])
                 # session['access_token'] = access_token
                 if session['user']['role'] == AccountRole.ADMIN.value:
                     return redirect(url_for('admin.index'))

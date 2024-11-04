@@ -24,7 +24,7 @@ def add():
         flash('Music added successfully!', 'success')
         return redirect(url_for('music.list_music'))
 
-    return render_template('admin/music/add.html', form=form)
+    return render_template('components/music/add_music.html', form=form)
 
 
 @admin_music_bp.route('/list', methods=['GET'])

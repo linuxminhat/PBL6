@@ -1,11 +1,16 @@
 function addArtist(event) {
     event.preventDefault(); // Prevent the form from submitting normally
-    const artistId = $('#artist-id').val();
-    const artistName = $('#artist-name').val();
-    const artistUsername = $('#artist-username').val();
-    const artistEmail = $('#artist-email').val();
-    const artistPassword = $('#artist-password').val();
-    const artistDateOfBirth = $('#artist-dob').val();
+
+    // Get the values from the form
+    const artistId = document.getElementById('artist-id').value;
+    const artistName = document.getElementById('artist-name').value;
+    const artistUsername = document.getElementById('artist-username').value;
+    const artistEmail = document.getElementById('artist-email').value;
+    const artistPassword = document.getElementById('artist-password').value;
+    const artistDateOfBirth = document.getElementById('artist-dob').value;
+    // You can now use these values to update the genre
+    // For example, you might send them to a server using an API call
+    // Create the data object to send
     const data = {
         id: artistId,
         name: artistName,
@@ -17,7 +22,7 @@ function addArtist(event) {
     };
 
     // Make the API call using Axios
-    axios.post('/api/admin/artist/', data)
+    axios.post('http://localhost:5000/api/admin/artist/', data)
         .then(function (response) {
             location.reload();
         })

@@ -1,0 +1,68 @@
+[{
+  "_id": {
+    "$oid": "6700f8be5ef0ad4763b9eba4"
+  },
+  "user": {
+    "$oid": "670ba36d5aa8524c955e32fb"
+  },
+  "music": {
+    "$oid": "6700f8be5ef0ad4763b9eba2"
+  },
+  "video_url": "https://res.cloudinary.com/dxfwodlfi/video/upload/v1728115712/y2mate.com_-_Bill_Bill_Bill_Bill_Science_rules_thanks_to_you_TheRealBillNye_billnye_creatorawards_v720P_boqqkj.mp4",
+  "like_count": 137,
+  "comments": [
+    {
+      "_id": {
+        "$oid": "6700f8be5ef0ad4763b9eba3"
+      },
+      "user": {
+        "$oid": "670ba36e5aa8524c955e32ff"
+      },
+      "content": "Nicde video!",
+      "like_count": 0,
+      "created_at": {
+        "$date": "2024-10-05T15:28:45.388Z"
+      }
+    }
+  ],
+  "created_at": {
+    "$date": "2024-10-05T15:28:45.392Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-05T15:28:45.392Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6701061fbbae194087b794d7"
+  },
+  "user": {
+    "$oid": "670ba36d5aa8524c955e32fc"
+  },
+  "music": {
+    "$oid": "6700f8be5ef0ad4763b9eba2"
+  },
+  "video_url": "https://res.cloudinary.com/dxfwodlfi/video/upload/v1728120333/y2mate.com_-_M%E1%BB%99t_Ng%C3%A0y_%C4%90i_L%C3%A0m_c%C3%B9ng_Nghi%C3%AAn_C%E1%BB%A9u_Sinh_Ti%E1%BA%BFn_S%C4%A9_Ng%C3%A0nh_AI_t%E1%BA%A1i_%C3%9Ac_720pFHR_b3hy7n.mp4",
+  "like_count": 82,
+  "comments": [
+    {
+      "_id": {
+        "$oid": "6701061fbbae194087b794d6"
+      },
+      "user": {
+        "$oid": "670ba36e5aa8524c955e32fc"
+      },
+      "content": "Good good!",
+      "like_count": 0,
+      "created_at": {
+        "$date": "2024-10-05T16:25:51.129Z"
+      }
+    }
+  ],
+  "created_at": {
+    "$date": "2024-10-05T16:25:51.136Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-05T16:25:51.137Z"
+  }
+}]

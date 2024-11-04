@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, url_for
 
 from app.decorators import login_required
 from app.models.artist import Artist
@@ -13,12 +13,8 @@ admin_artist_bp = Blueprint('artist', __name__)
 @admin_artist_bp.route('/list', methods=['GET'])
 @login_required(role=AccountRole.ADMIN)
 def list():
-    page = request.args.get('page', 1, type=int)
-    per_page = 6  # Number of artists per page
-    total_artists = Artist.objects.count()
-    artists = Artist.objects.skip((page - 1) * per_page).limit(per_page)
-    total_pages = (total_artists + per_page - 1) // per_page
-    return render_template('admin/artist/list.html', artists=artists, page=page, per_page=per_page, total_pages=total_pages)
+    artists = Artist.objects().all()
+    return render_template('admin/artist/list.html', artists=artists)
 
 
 @admin_artist_bp.route('/add', methods=['GET', 'POST'])

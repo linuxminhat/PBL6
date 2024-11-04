@@ -1,0 +1,339 @@
+[{
+  "_id": {
+    "$oid": "670ba36c5aa8524c955e32f9"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJFlZZUlkQVZ0NTNTanJ4RUwyVVpkVE9Od2VoZ0l1Mm0xT0VEbDlKSllMWi9Ld0Jrc0syai9P",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36d5aa8524c955e32fa"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh1",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJG9Scml3QlVVL0NJdXQvNTlQdE1VOHUxaFV2UDNIN1o0bHNLaUlaWHZlY3NtSElOaDZZZmYy",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh1@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36d5aa8524c955e32fb"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh2",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJEpVWURieXhCQktFMGEwcElaSW5CdHVOZHc3Nk5nOHByT2dxNDJMTDdUa2dRN2JQZ2ZkRFF1",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh2@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36d5aa8524c955e32fc"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh3",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJEM5Z3V6QXVOWVJuVEp3ZkFpOU82ME9YNW51WjVCQ0ZXNWRLZjVJeWcvMG1zbVp2Snh4T1Bp",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh3@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36d5aa8524c955e32fd"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh4",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJFFjTEozeDhnSm1RWnVyVUtzRjJsTi5DS1JPOE5SZE1qcTFNMmFZQWZ0aFdTNEh3dm0wejZt",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh4@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36d5aa8524c955e32fe"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh5",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJDJKTTZWS0NqZG1SSXRTcmF1RFRjZU9EVTJSSUNQUGVZZW5nQUlwaWMuTzl6NGxLZWhjaDlP",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh5@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36e5aa8524c955e32ff"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh6",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJE85Qi4xZmZCdlJCSWgva29SMzBFQnVDR2pZSVNHL3B1alhUOXVvcWdjU1Nrc1pzWk4xcFBD",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh6@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36e5aa8524c955e3300"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh7",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJHNKdG0uZ1RQYnJmM3AwT3dPQy5wZk8yaTF0NnFhOFpvWS90VGlYcmpUMGd4V2J5cnJCUUYu",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh7@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba36e5aa8524c955e3301"
+  },
+  "_cls": "Account.ExtendedAccount.User",
+  "username": "nhatminh8",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJHdyT0NUZmNGYjJ5N3ZpT0Muc2VvT3VSSmQycVVFMFRPQy9YWFQ4Y0w3VTk3aExoNEt6SWhp",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:39:40.535Z"
+  },
+  "email": "nhatminh8@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": [],
+  "favourite_genres": []
+},
+{
+  "_id": {
+    "$oid": "670ba4189e94f6ad1384f2a5"
+  },
+  "_cls": "Account.ExtendedAccount.Artist",
+  "username": "jack97",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJEVOWU5HZzV4WnNCWjQzVkl3Y09XZC5RazNmdmk4b1JPQ1VEM0FXZzlreEtQTmhudmQzM3Ey",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:42:32.429Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:42:32.429Z"
+  },
+  "email": "jack97@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": []
+},
+{
+  "_id": {
+    "$oid": "670ba4189e94f6ad1384f2a6"
+  },
+  "_cls": "Account.ExtendedAccount.Artist",
+  "username": "sontung",
+  "name": "Dang Nhat Minh",
+  "password": {
+    "$binary": {
+      "base64": "JDJiJDEyJHJxOU1YYnZGbVYuRnlPVG5vUWw4N3V6RkdpRWQ2R2dMZ0pETUR2N1AuQ3BVOHA3ZGkyNHlP",
+      "subType": "00"
+    }
+  },
+  "created_at": {
+    "$date": "2024-10-13T17:42:32.429Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-13T17:42:32.429Z"
+  },
+  "email": "sontung@gmail.com",
+  "followers_count": 0,
+  "following_count": 0,
+  "date_of_birth": {
+    "$date": "2003-10-28T00:00:00.000Z"
+  },
+  "user_vector": [],
+  "notifications": [],
+  "like_videos": [],
+  "like_comments": []
+}]

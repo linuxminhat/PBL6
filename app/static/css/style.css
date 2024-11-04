@@ -47,7 +47,7 @@ body {
 }
 
 #content {
-    /*margin-top: 0;*/
+    margin-top: 50px;
     margin-left: 250px; /* Should match the sidebar width */
     transition: all 0.3s;
 }
@@ -59,43 +59,115 @@ body {
 .navbar {
     z-index: 1000;
 }
-
-.card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    width: 300px;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+/* Tùy chỉnh khoảng cách giữa icon và text */
+.dropdown-item svg {
+    vertical-align: middle;
 }
-
-.card img {
-    max-width: 100%;
-    border-radius: 5px 5px 0 0;
-}
-
-.card-body {
-    padding: 10px;
-}
-
-.card-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.card-description {
-    font-size: 1em;
-    margin-bottom: 10px;
-}
-
-.card-footer {
-    text-align: center;
-    font-size: 0.9em;
-    color: #555;
-}
-
-.card-container {
+.dropdown-item {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    align-items: center;
 }
+.dropdown-item .me-2 {
+    margin-right: 8px;
+}
+#close-description {
+    z-index: 9999;
+    cursor: pointer;
+}
+.btn-close {
+    z-index: 9999;
+    position: relative;
+}
+.modal-header {
+    padding-bottom: 20px; /* Thêm khoảng cách giữa header và nội dung */
+}
+
+.modal-body {
+    padding-top: 10px;
+}
+
+.bi-facebook {
+        color: #3b5998; /* Màu Facebook */
+}
+
+.bi-pinterest {
+    color: #bd081c; /* Màu Pinterest */
+}
+
+.bi-whatsapp {
+    color: #25d366; /* Màu WhatsApp */
+}
+
+.bi-twitter {
+    color: #1da1f2; /* Màu Twitter (X) */
+}
+
+.bi-envelope {
+    color: #d44638; /* Màu Email */
+}
+
+.bi-chat-dots {
+    color: #ffcd00; /* Màu KakaoTalk */
+}
+
+.bi-reddit {
+    color: #ff4500; /* Màu Reddit */
+}
+
+.bi-linkedin {
+    color: #0077b5; /* Màu LinkedIn */
+}
+
+.bi-tumblr {
+    color: #35465c; /* Màu Tumblr */
+}
+
+/* Đảm bảo biểu tượng đủ lớn để dễ nhìn */
+.bi {
+    font-size: 24px;
+}
+/*comment
+/* CSS cho các nút like, dislike, và phản hồi */
+.button-custom {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button-custom:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+}
+
+.icon-active {
+    fill: #007bff; /* Màu xanh cho nút đã tương tác */
+}
+.icon-button {
+    background-color: transparent;
+    border: none;
+    color: #6c757d;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.icon-button:hover {
+    color: #007bff;
+}
+
+.icon-button .bi {
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
+

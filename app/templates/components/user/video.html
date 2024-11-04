@@ -1,0 +1,160 @@
+{#<div class="flex justify-center items-center h-screen bg-gray-100">#}
+{#    <!-- Left region for new features (5 buttons) -->#}
+{#    <div class="flex flex-col justify-center space-y-8 mr-4"> <!-- space-y-8 increases space between buttons -->#}
+{#        <!-- Button Like -->#}
+{#        <div class="flex flex-col items-center">#}
+{#            <button id="like-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#                <!-- Like icon (SVG) -->#}
+{#                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up">#}
+{#                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>#}
+{#                </svg>#}
+{#            </button>#}
+{#            <span id="like-count" class="text-sm">1</span> <!-- Initial like count -->#}
+{#        </div>#}
+{##}
+{#        <!-- Button Dislike -->#}
+{#        <button id="dislike-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#            <!-- Dislike icon (SVG) -->#}
+{#            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-down">#}
+{#                <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path>#}
+{#            </svg>#}
+{#        </button>#}
+{##}
+{#        <!-- Button Comment -->#}
+{#        <div class="flex flex-col items-center">#}
+{#            <button id="comment-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#                <!-- Comment icon (SVG) -->#}
+{#                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">#}
+{#                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>#}
+{#                </svg>#}
+{#            </button>#}
+{#            <span id="comment-count" class="text-sm">0</span> <!-- Initial comment count -->#}
+{#        </div>#}
+{##}
+{#        <!-- Button Share -->#}
+{#        <div class="flex flex-col items-center">#}
+{#            <button id="share-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#                <!-- Share icon (SVG) -->#}
+{#                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share">#}
+{#                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>#}
+{#                    <polyline points="16 6 12 2 8 6"></polyline>#}
+{#                    <line x1="12" y1="2" x2="12" y2="15"></line>#}
+{#                </svg>#}
+{#            </button>#}
+{#            <span class="text-sm">Share</span> <!-- Text below the Share button -->#}
+{#        </div>#}
+{##}
+{#        <!-- Button Settings -->#}
+{#        <button id="settings-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#            <!-- Settings icon (SVG) -->#}
+{#            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings">#}
+{#                <circle cx="12" cy="12" r="3"></circle>#}
+{#                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09a1.65 1.65 0 0 0 1.51-1.65V9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1.65z"></path>#}
+{#            </svg>#}
+{#        </button>#}
+{#    </div>#}
+{##}
+{#    <!-- Video Section (Centered) -->#}
+{#    <div class="relative max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden flex justify-center">#}
+{#        <!-- Video Container -->#}
+{#        <div class="relative w-full h-0" style="padding-bottom: 177.78%;"> <!-- 9:16 aspect ratio -->#}
+{#            <iframe id="video-player" class="absolute top-0 left-0 w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <!-- Buttons for navigating videos (outside the video, on the right) -->#}
+{#    <div class="flex flex-col space-y-8 ml-4"> <!-- space-y-8 increases space between buttons -->#}
+{#        <button id="prev-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#            &#8679; <!-- Arrow Up -->#}
+{#        </button>#}
+{#        <button id="next-button" class="w-30 h-30 bg-gray-100 text-gray-700 rounded-full shadow-lg hover:bg-gray-200 flex items-center justify-center text-2xl"> <!-- w-30 h-30 increases button size -->#}
+{#            &#8681; <!-- Arrow Down -->#}
+{#        </button>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<script>#}
+{#    let videos = []; // To store the list of videos#}
+{#    let currentIndex = 0; // To keep track of the current video index#}
+{##}
+{#    // Function to load a video by index#}
+{#    function loadVideo(index) {#}
+{#        if (index >= 0 && index < videos.length) {#}
+{#            const video = videos[index];#}
+{#            const videoPlayer = document.getElementById('video-player');#}
+{#            videoPlayer.src = video.video_url;#}
+{#        }#}
+{#    }#}
+{##}
+{#    // Fetch the list of videos from the API#}
+{#    function fetchVideos() {#}
+{#        fetch('/api/video/get')#}
+{#            .then(response => response.json())#}
+{#            .then(data => {#}
+{#                videos = data;#}
+{#                if (videos.length > 0) {#}
+{#                    loadVideo(0); // Load the first video initially#}
+{#                }#}
+{#            })#}
+{#            .catch(error => console.error('Error fetching videos:', error));#}
+{#    }#}
+{##}
+{#    // Event listeners for navigation buttons#}
+{#    document.getElementById('prev-button').addEventListener('click', function () {#}
+{#        if (currentIndex > 0) {#}
+{#            currentIndex -= 1;#}
+{#            loadVideo(currentIndex);#}
+{#        }#}
+{#    });#}
+{##}
+{#    document.getElementById('next-button').addEventListener('click', function () {#}
+{#        if (currentIndex < videos.length - 1) {#}
+{#            currentIndex += 1;#}
+{#            loadVideo(currentIndex);#}
+{#        }#}
+{#    });#}
+{##}
+{#    // Event listener for mouse wheel scroll#}
+{#    window.addEventListener('wheel', function (event) {#}
+{#        if (event.deltaY < 0) {#}
+{#            // Scroll up#}
+{#            if (currentIndex > 0) {#}
+{#                currentIndex -= 1;#}
+{#                loadVideo(currentIndex);#}
+{#            }#}
+{#        } else if (event.deltaY > 0) {#}
+{#            // Scroll down#}
+{#            if (currentIndex < videos.length - 1) {#}
+{#                currentIndex += 1;#}
+{#                loadVideo(currentIndex);#}
+{#            }#}
+{#        }#}
+{#    });#}
+{##}
+{#    // Like button functionality#}
+{#    let likeCount = 1;#}
+{#    document.getElementById('like-button').addEventListener('click', function () {#}
+{#        likeCount += 1;#}
+{#        document.getElementById('like-count').innerText = likeCount;#}
+{#    });#}
+{##}
+{#    // Placeholder functionality for other buttons#}
+{#    document.getElementById('comment-button').addEventListener('click', function () {#}
+{#        alert('Comment functionality not implemented yet');#}
+{#    });#}
+{##}
+{#    document.getElementById('dislike-button').addEventListener('click', function () {#}
+{#        alert('Dislike functionality not implemented yet');#}
+{#    });#}
+{##}
+{#    document.getElementById('share-button').addEventListener('click', function () {#}
+{#        alert('Share functionality not implemented yet');#}
+{#    });#}
+{##}
+{#    document.getElementById('settings-button').addEventListener('click', function () {#}
+{#        alert('Settings functionality not implemented yet');#}
+{#    });#}
+{##}
+{#    // Initial call to fetch and load videos#}
+{#    fetchVideos();#}
+{#</script>#}

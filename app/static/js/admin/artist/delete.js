@@ -1,13 +1,15 @@
 function deleteArtist() {
     // Get the values from the form
     const artistId = document.getElementById('delete-artist-id').value;
-    console.log('Deleting artist:', artistId);
+
+
     // Create the data object to send
     const data = {
         id: artistId
     };
+    console.log('Deleting artist:', data);
     // Make the API call using Axios
-    axios.delete('/api/admin/artist/', {
+    axios.delete('http://localhost:5000/api/admin/artist/', {
         data: data,
         headers: {
             'Content-Type': 'application/json'

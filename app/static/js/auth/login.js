@@ -2,8 +2,8 @@ function login(event) {
     event.preventDefault(); // Prevent the form from submitting normally
 
     // Get the values from the form
-    const username = $('#login-username').val();
-    const password = $('#login-password').val();
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
 
     const data = {
         username: username,

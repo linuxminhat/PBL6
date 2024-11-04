@@ -2,14 +2,14 @@ function updateArtist(event) {
     event.preventDefault(); // Prevent the form from submitting normally
 
     // Get the values from the form
-    const artistId = $('#update-artist-id').val();
-    const artistName = $('#update-artist-name').val();
-    const artistUsername = $('#update-artist-username').val();
-    const artistEmail = $('#update-artist-email').val();
+    const artistId = document.getElementById('update-artist-id').value;
+    const artistName = document.getElementById('update-artist-name').value;
+    const artistUsername = document.getElementById('update-artist-username').value;
+    const artistEmail = document.getElementById('update-artist-email').value;
     // const artistOldPassword = document.getElementById('update-artist-oldPassword').value;
     // const artistNewPassword = document.getElementById('update-artist-newPassword').value;
-    const artistPassword = $('#update-artist-password').val();
-    const artistDateOfBirth = $('#update-artist-dob').val();
+    const artistPassword = document.getElementById('update-artist-password').value;
+    const artistDateOfBirth = document.getElementById('update-artist-dob').value;
     // Create the data object to send
     const data = {
         id: artistId,
@@ -21,7 +21,7 @@ function updateArtist(event) {
     };
 
     // Make the API call using Axios
-    axios.put('/api/admin/artist/', data)
+    axios.put('http://localhost:5000/api/admin/artist/', data)
         .then(function (response) {
             location.reload();
         })

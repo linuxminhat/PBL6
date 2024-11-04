@@ -6,15 +6,13 @@ from app.models.artist import Artist
 from app.models.genre import Genre
 from app.routes.forms.add_genre_form import AddGenreForm
 from models.enum.account_role import AccountRole
-from app.utils.sanitizer import sanitize_html
+
 admin_genre_bp = Blueprint('genre', __name__)
 
 @admin_genre_bp.route('/list', methods=['GET'])
 @login_required(role=AccountRole.ADMIN)
 def list():
     genres = Genre.get_all_genre()
-    for genre in genres:
-        genre['description'] = sanitize_html(genre['description'])
     return render_template('admin/genre/list.html', genres=genres)
 
 @admin_genre_bp.route('/add', methods=['GET', 'POST'])

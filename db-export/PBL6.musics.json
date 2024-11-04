@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "6700f8be5ef0ad4763b9eba2"
+  },
+  "name": "Song 1",
+  "artists": [
+    {
+      "$oid": "670ba4189e94f6ad1384f2a5"
+    },
+    {
+      "$oid": "670ba4189e94f6ad1384f2a6"
+    }
+  ],
+  "genres": [
+    {
+      "$oid": "6700f8bd5ef0ad4763b9eb9c"
+    },
+    {
+      "$oid": "6700f8bd5ef0ad4763b9eb9d"
+    },
+    {
+      "$oid": "6700f8bd5ef0ad4763b9eb9e"
+    }
+  ],
+  "music_url": "https://res.cloudinary.com/dxfwodlfi/video/upload/v1728116489/y2mate.com_-_JACK_J97_THI%C3%8AN_L%C3%9D_%C6%A0I_Official_Music_Video_pdevza.mp3",
+  "metric_url": "https://metrics.com/song1_metric.json",
+  "lyrics": [
+    {
+      "order": 1,
+      "text": "Thiên lý ơi em có thể ở lại đây không",
+      "start_time": "00:00:01.123",
+      "end_time": "00:00:04.456",
+      "artist_index": 0,
+      "vector": []
+    },
+    {
+      "order": 2,
+      "text": "Chạy ngay đi",
+      "start_time": "00:00:05.000",
+      "end_time": "00:00:07.901",
+      "artist_index": 1,
+      "vector": []
+    }
+  ],
+  "name_embedded": [],
+  "created_at": {
+    "$date": "2024-10-05T15:28:45.390Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-05T15:28:45.390Z"
+  }
+}]

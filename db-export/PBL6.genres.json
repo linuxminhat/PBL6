@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "6700f8bd5ef0ad4763b9eb9c"
+  },
+  "name": "Pop",
+  "description": "Pop music",
+  "created_at": {
+    "$date": "2024-10-05T15:28:45.389Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-05T15:28:45.389Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6700f8bd5ef0ad4763b9eb9d"
+  },
+  "name": "Rock",
+  "description": "Rock music",
+  "created_at": {
+    "$date": "2024-10-05T15:28:45.389Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-05T15:28:45.389Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6700f8bd5ef0ad4763b9eb9e"
+  },
+  "name": "Jazz",
+  "description": "Jazz music",
+  "created_at": {
+    "$date": "2024-10-05T15:28:45.389Z"
+  },
+  "updated_at": {
+    "$date": "2024-10-05T15:28:45.389Z"
+  }
+}]
