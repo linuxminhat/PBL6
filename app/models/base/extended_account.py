@@ -13,8 +13,8 @@ class ExtendedAccount(Account):
     bio = StringField(max_length=255)
     notifications = ListField(EmbeddedDocumentField('Notification'))
     like_videos = ListField(LazyReferenceField('Video'), default=list)
-
     like_comments = ListField(ObjectIdField(), default=list)
+
 
 
     meta = {

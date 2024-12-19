@@ -1,16 +1,10 @@
-# PBL6/app/routes/user/generate_music/__init__.py
-
 from flask import Blueprint, request, send_file, jsonify, render_template
-from transformers import pipeline
-import scipy.io.wavfile
-import os
+import requests
 import uuid
 import tempfile
+import os
 
 generate_music_bp = Blueprint('generate_music', __name__)
-
-# Initialize the text-to-audio synthesizer
-synthesiser = pipeline("text-to-audio", model="facebook/musicgen-small")
 
 @generate_music_bp.route('/', methods=['GET'])
 def custom_music():
@@ -19,38 +13,33 @@ def custom_music():
 @generate_music_bp.route('/generate_music', methods=['POST'])
 def generate_music():
     try:
-        # Get the input text from the request
+        # Lấy dữ liệu từ request
         data = request.get_json()
         if not data or 'text' not in data:
             return jsonify({"error": "Request must contain 'text' in JSON body"}), 400
 
         text = data['text']
 
-        # Generate the audio using the model
-        music = synthesiser(text, forward_params={"do_sample": True})
+        # Gửi yêu cầu POST đến API trên cổng 8000
+        api_url = "http://localhost:8000/generate-music"
+        response = requests.post(api_url, json={"text": text})
 
-        # Tạo tên tệp tin duy nhất
+        if response.status_code != 200:
+            return jsonify({"error": "Error from music generation API"}), response.status_code
+
+        # Lưu tệp âm thanh tạm thời
         unique_filename = f"musicgen_{uuid.uuid4().hex}.wav"
-
-        # Tạo tệp tin tạm thời
         with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
-            scipy.io.wavfile.write(tmp_file.name, rate=music["sampling_rate"], data=music["audio"])
+            tmp_file.write(response.content)
             tmp_file_path = tmp_file.name
 
-        # Trả về tệp tin âm thanh
-        response = send_file(
+        # Trả về tệp âm thanh
+        return send_file(
             tmp_file_path,
             as_attachment=True,
             download_name=unique_filename,
             mimetype="audio/wav"
         )
-
-        # Sau khi gửi tệp tin, xóa tệp tin tạm thời
-        @response.call_on_close
-        def remove_file():
-            os.remove(tmp_file_path)
-
-        return response
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
